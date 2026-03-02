@@ -1,0 +1,34 @@
+[
+  {
+    "id": "u1",
+    "email": "farmer@demo.com",
+    "hashed_password": "$2b$12$ZpEtRFFytMM68OZhSdTJQeLNgzF.8wdrWlYvJJb7.OuzQyM/6xLou",
+    "role": "farmer",
+    "farm_ids": ["farm_1"],
+    "org_id": null
+  },
+  {
+    "id": "u2",
+    "email": "enterprise@demo.com",
+    "hashed_password": "$2b$12$ZpEtRFFytMM68OZhSdTJQeLNgzF.8wdrWlYvJJb7.OuzQyM/6xLou",
+    "role": "enterprise",
+    "farm_ids": ["farm_1", "farm_2"],
+    "org_id": "org_1"
+  },
+  {
+    "id": "u3",
+    "email": "admin@igransense.com",
+    "hashed_password": "$2b$12$ZpEtRFFytMM68OZhSdTJQeLNgzF.8wdrWlYvJJb7.OuzQyM/6xLou",
+    "role": "admin",
+    "farm_ids": [],
+    "org_id": null
+  },
+  {
+    "id": "u4",
+    "email": "local",
+    "hashed_password": "$2b$12$ZpEtRFFytMM68OZhSdTJQeLNgzF.8wdrWlYvJJb7.OuzQyM/6xLou",
+    "role": "local_farm",
+    "farm_ids": ["farm_1"],
+    "org_id": null
+  }
+]

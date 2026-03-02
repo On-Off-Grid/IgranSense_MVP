@@ -1,0 +1,352 @@
+[
+  {
+    "date": "2026-02-28",
+    "field_id": "field_9",
+    "mean_ndvi": 0.6,
+    "min_ndvi": 0.55,
+    "max_ndvi": 0.66
+  },
+  {
+    "date": "2026-02-28",
+    "field_id": "field_8",
+    "mean_ndvi": 0.28,
+    "min_ndvi": 0.23,
+    "max_ndvi": 0.34
+  },
+  {
+    "date": "2026-02-28",
+    "field_id": "field_7",
+    "mean_ndvi": 0.45,
+    "min_ndvi": 0.4,
+    "max_ndvi": 0.51
+  },
+  {
+    "date": "2026-02-28",
+    "field_id": "field_6",
+    "mean_ndvi": 0.73,
+    "min_ndvi": 0.68,
+    "max_ndvi": 0.79
+  },
+  {
+    "date": "2026-02-28",
+    "field_id": "field_5",
+    "mean_ndvi": 0.55,
+    "min_ndvi": 0.5,
+    "max_ndvi": 0.61
+  },
+  {
+    "date": "2026-02-28",
+    "field_id": "field_4",
+    "mean_ndvi": 0.7,
+    "min_ndvi": 0.65,
+    "max_ndvi": 0.76
+  },
+  {
+    "date": "2026-02-28",
+    "field_id": "field_3",
+    "mean_ndvi": 0.72,
+    "min_ndvi": 0.67,
+    "max_ndvi": 0.78
+  },
+  {
+    "date": "2026-02-28",
+    "field_id": "field_2",
+    "mean_ndvi": 0.48,
+    "min_ndvi": 0.43,
+    "max_ndvi": 0.54
+  },
+  {
+    "date": "2026-02-28",
+    "field_id": "field_10",
+    "mean_ndvi": 0.5,
+    "min_ndvi": 0.45,
+    "max_ndvi": 0.56
+  },
+  {
+    "date": "2026-02-28",
+    "field_id": "field_1",
+    "mean_ndvi": 0.32,
+    "min_ndvi": 0.27,
+    "max_ndvi": 0.38
+  },
+  {
+    "date": "2026-02-21",
+    "field_id": "field_9",
+    "mean_ndvi": 0.6,
+    "min_ndvi": 0.55,
+    "max_ndvi": 0.67
+  },
+  {
+    "date": "2026-02-21",
+    "field_id": "field_8",
+    "mean_ndvi": 0.35,
+    "min_ndvi": 0.3,
+    "max_ndvi": 0.41
+  },
+  {
+    "date": "2026-02-21",
+    "field_id": "field_7",
+    "mean_ndvi": 0.49,
+    "min_ndvi": 0.44,
+    "max_ndvi": 0.55
+  },
+  {
+    "date": "2026-02-21",
+    "field_id": "field_6",
+    "mean_ndvi": 0.73,
+    "min_ndvi": 0.68,
+    "max_ndvi": 0.79
+  },
+  {
+    "date": "2026-02-21",
+    "field_id": "field_5",
+    "mean_ndvi": 0.58,
+    "min_ndvi": 0.53,
+    "max_ndvi": 0.64
+  },
+  {
+    "date": "2026-02-21",
+    "field_id": "field_4",
+    "mean_ndvi": 0.7,
+    "min_ndvi": 0.65,
+    "max_ndvi": 0.76
+  },
+  {
+    "date": "2026-02-21",
+    "field_id": "field_3",
+    "mean_ndvi": 0.71,
+    "min_ndvi": 0.66,
+    "max_ndvi": 0.77
+  },
+  {
+    "date": "2026-02-21",
+    "field_id": "field_2",
+    "mean_ndvi": 0.51,
+    "min_ndvi": 0.46,
+    "max_ndvi": 0.56
+  },
+  {
+    "date": "2026-02-21",
+    "field_id": "field_10",
+    "mean_ndvi": 0.52,
+    "min_ndvi": 0.47,
+    "max_ndvi": 0.58
+  },
+  {
+    "date": "2026-02-21",
+    "field_id": "field_1",
+    "mean_ndvi": 0.4,
+    "min_ndvi": 0.35,
+    "max_ndvi": 0.46
+  },
+  {
+    "date": "2026-02-14",
+    "field_id": "field_9",
+    "mean_ndvi": 0.61,
+    "min_ndvi": 0.56,
+    "max_ndvi": 0.67
+  },
+  {
+    "date": "2026-02-14",
+    "field_id": "field_8",
+    "mean_ndvi": 0.42,
+    "min_ndvi": 0.37,
+    "max_ndvi": 0.48
+  },
+  {
+    "date": "2026-02-14",
+    "field_id": "field_7",
+    "mean_ndvi": 0.53,
+    "min_ndvi": 0.48,
+    "max_ndvi": 0.58
+  },
+  {
+    "date": "2026-02-14",
+    "field_id": "field_6",
+    "mean_ndvi": 0.74,
+    "min_ndvi": 0.69,
+    "max_ndvi": 0.8
+  },
+  {
+    "date": "2026-02-14",
+    "field_id": "field_5",
+    "mean_ndvi": 0.6,
+    "min_ndvi": 0.55,
+    "max_ndvi": 0.66
+  },
+  {
+    "date": "2026-02-14",
+    "field_id": "field_4",
+    "mean_ndvi": 0.71,
+    "min_ndvi": 0.66,
+    "max_ndvi": 0.77
+  },
+  {
+    "date": "2026-02-14",
+    "field_id": "field_3",
+    "mean_ndvi": 0.7,
+    "min_ndvi": 0.65,
+    "max_ndvi": 0.76
+  },
+  {
+    "date": "2026-02-14",
+    "field_id": "field_2",
+    "mean_ndvi": 0.53,
+    "min_ndvi": 0.48,
+    "max_ndvi": 0.59
+  },
+  {
+    "date": "2026-02-14",
+    "field_id": "field_10",
+    "mean_ndvi": 0.54,
+    "min_ndvi": 0.49,
+    "max_ndvi": 0.6
+  },
+  {
+    "date": "2026-02-14",
+    "field_id": "field_1",
+    "mean_ndvi": 0.48,
+    "min_ndvi": 0.43,
+    "max_ndvi": 0.54
+  },
+  {
+    "date": "2026-02-07",
+    "field_id": "field_9",
+    "mean_ndvi": 0.61,
+    "min_ndvi": 0.56,
+    "max_ndvi": 0.68
+  },
+  {
+    "date": "2026-02-07",
+    "field_id": "field_8",
+    "mean_ndvi": 0.48,
+    "min_ndvi": 0.43,
+    "max_ndvi": 0.54
+  },
+  {
+    "date": "2026-02-07",
+    "field_id": "field_7",
+    "mean_ndvi": 0.56,
+    "min_ndvi": 0.51,
+    "max_ndvi": 0.62
+  },
+  {
+    "date": "2026-02-07",
+    "field_id": "field_6",
+    "mean_ndvi": 0.74,
+    "min_ndvi": 0.69,
+    "max_ndvi": 0.8
+  },
+  {
+    "date": "2026-02-07",
+    "field_id": "field_5",
+    "mean_ndvi": 0.62,
+    "min_ndvi": 0.57,
+    "max_ndvi": 0.69
+  },
+  {
+    "date": "2026-02-07",
+    "field_id": "field_4",
+    "mean_ndvi": 0.71,
+    "min_ndvi": 0.66,
+    "max_ndvi": 0.77
+  },
+  {
+    "date": "2026-02-07",
+    "field_id": "field_3",
+    "mean_ndvi": 0.69,
+    "min_ndvi": 0.64,
+    "max_ndvi": 0.75
+  },
+  {
+    "date": "2026-02-07",
+    "field_id": "field_2",
+    "mean_ndvi": 0.55,
+    "min_ndvi": 0.5,
+    "max_ndvi": 0.61
+  },
+  {
+    "date": "2026-02-07",
+    "field_id": "field_10",
+    "mean_ndvi": 0.56,
+    "min_ndvi": 0.51,
+    "max_ndvi": 0.62
+  },
+  {
+    "date": "2026-02-07",
+    "field_id": "field_1",
+    "mean_ndvi": 0.57,
+    "min_ndvi": 0.52,
+    "max_ndvi": 0.63
+  },
+  {
+    "date": "2026-01-31",
+    "field_id": "field_9",
+    "mean_ndvi": 0.62,
+    "min_ndvi": 0.57,
+    "max_ndvi": 0.68
+  },
+  {
+    "date": "2026-01-31",
+    "field_id": "field_8",
+    "mean_ndvi": 0.55,
+    "min_ndvi": 0.5,
+    "max_ndvi": 0.61
+  },
+  {
+    "date": "2026-01-31",
+    "field_id": "field_7",
+    "mean_ndvi": 0.6,
+    "min_ndvi": 0.55,
+    "max_ndvi": 0.66
+  },
+  {
+    "date": "2026-01-31",
+    "field_id": "field_6",
+    "mean_ndvi": 0.75,
+    "min_ndvi": 0.7,
+    "max_ndvi": 0.81
+  },
+  {
+    "date": "2026-01-31",
+    "field_id": "field_5",
+    "mean_ndvi": 0.65,
+    "min_ndvi": 0.6,
+    "max_ndvi": 0.71
+  },
+  {
+    "date": "2026-01-31",
+    "field_id": "field_4",
+    "mean_ndvi": 0.72,
+    "min_ndvi": 0.67,
+    "max_ndvi": 0.78
+  },
+  {
+    "date": "2026-01-31",
+    "field_id": "field_3",
+    "mean_ndvi": 0.68,
+    "min_ndvi": 0.63,
+    "max_ndvi": 0.74
+  },
+  {
+    "date": "2026-01-31",
+    "field_id": "field_2",
+    "mean_ndvi": 0.58,
+    "min_ndvi": 0.53,
+    "max_ndvi": 0.64
+  },
+  {
+    "date": "2026-01-31",
+    "field_id": "field_10",
+    "mean_ndvi": 0.58,
+    "min_ndvi": 0.53,
+    "max_ndvi": 0.64
+  },
+  {
+    "date": "2026-01-31",
+    "field_id": "field_1",
+    "mean_ndvi": 0.65,
+    "min_ndvi": 0.6,
+    "max_ndvi": 0.71
+  }
+]

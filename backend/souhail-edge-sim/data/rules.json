@@ -1,0 +1,40 @@
+{
+  "crop_type": "tomato",
+  "soil_moisture_rules": [
+    {
+      "min_inclusive": null,
+      "max_exclusive": 18.0,
+      "status": "critical",
+      "severity": "critical",
+      "recommendation": "Irrigate immediately — soil moisture below 18% critical threshold."
+    },
+    {
+      "min_inclusive": 18.0,
+      "max_exclusive": 25.0,
+      "status": "warning",
+      "severity": "warning",
+      "recommendation": "Schedule irrigation within 24 hours — soil moisture between 18% and 25%."
+    },
+    {
+      "min_inclusive": 25.0,
+      "max_exclusive": null,
+      "status": "ok",
+      "severity": "info",
+      "recommendation": "No irrigation needed — soil moisture above 25%."
+    }
+  ],
+  "ndvi_trend_rules": [
+    {
+      "drop_pct_threshold": 15.0,
+      "severity": "warning",
+      "recommendation": "Potential crop stress — NDVI dropped more than 15% week-over-week, inspect field."
+    }
+  ],
+  "ndvi_absolute_rules": [
+    {
+      "min_ndvi": 0.35,
+      "severity": "critical",
+      "recommendation": "Severe stress — NDVI below 0.35 for healthy-stage tomato crop, investigate immediately."
+    }
+  ]
+}

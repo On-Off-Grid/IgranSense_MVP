@@ -1,0 +1,92 @@
+[
+  {
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "name": "Tomato Block A",
+    "area_ha": 2.5,
+    "polygon": [[0,0], [100,0], [100,75], [0,75]],
+    "grid_rows": 3,
+    "grid_cols": 4
+  },
+  {
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "name": "Tomato Block B",
+    "area_ha": 3.0,
+    "polygon": [[0,0], [100,0], [100,80], [0,80]],
+    "grid_rows": 4,
+    "grid_cols": 4
+  },
+  {
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "name": "Tomato Block C",
+    "area_ha": 2.0,
+    "polygon": [[0,0], [80,0], [100,50], [80,100], [0,100]],
+    "grid_rows": 3,
+    "grid_cols": 3
+  },
+  {
+    "field_id": "field_4",
+    "farm_id": "farm_2",
+    "name": "Olive Grove North",
+    "area_ha": 4.0,
+    "polygon": [[10,0], [90,0], [100,50], [90,100], [10,100], [0,50]],
+    "grid_rows": 3,
+    "grid_cols": 3
+  },
+  {
+    "field_id": "field_5",
+    "farm_id": "farm_2",
+    "name": "Olive Grove South",
+    "area_ha": 3.5,
+    "polygon": [[0,0], [100,0], [100,100], [0,100]],
+    "grid_rows": 3,
+    "grid_cols": 3
+  },
+  {
+    "field_id": "field_6",
+    "farm_id": "farm_2",
+    "name": "Citrus Orchard",
+    "area_ha": 2.8,
+    "polygon": [[0,20], [100,0], [100,80], [0,100]],
+    "grid_rows": 2,
+    "grid_cols": 2
+  },
+  {
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "name": "Vegetable Patch A",
+    "area_ha": 1.5,
+    "polygon": [[0,0], [100,0], [100,100], [0,100]],
+    "grid_rows": 2,
+    "grid_cols": 2
+  },
+  {
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "name": "Vegetable Patch B",
+    "area_ha": 1.2,
+    "polygon": [[0,0], [100,0], [80,100], [20,100]],
+    "grid_rows": 2,
+    "grid_cols": 2
+  },
+  {
+    "field_id": "field_9",
+    "farm_id": "farm_3",
+    "name": "Date Palm West",
+    "area_ha": 5.0,
+    "polygon": [[0,10], [30,0], [100,0], [100,100], [30,100], [0,90]],
+    "grid_rows": 3,
+    "grid_cols": 3
+  },
+  {
+    "field_id": "field_10",
+    "farm_id": "farm_3",
+    "name": "Date Palm East",
+    "area_ha": 4.5,
+    "polygon": [[0,0], [70,0], [100,10], [100,90], [70,100], [0,100]],
+    "grid_rows": 2,
+    "grid_cols": 2
+  }
+]

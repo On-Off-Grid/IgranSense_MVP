@@ -1,0 +1,245 @@
+[
+  {
+    "sensor_id": "SM_F1_01",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "type": "soil_moisture",
+    "grid_row": 1,
+    "grid_col": 1,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F1_02",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "type": "soil_moisture",
+    "grid_row": 1,
+    "grid_col": 3,
+    "status": "online"
+  },
+  {
+    "sensor_id": "TH_F1_01",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "type": "temperature",
+    "grid_row": 2,
+    "grid_col": 2,
+    "status": "online"
+  },
+  {
+    "sensor_id": "TH_F1_02",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "type": "humidity",
+    "grid_row": 3,
+    "grid_col": 4,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F2_01",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "type": "soil_moisture",
+    "grid_row": 1,
+    "grid_col": 2,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F2_02",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "type": "soil_moisture",
+    "grid_row": 2,
+    "grid_col": 4,
+    "status": "battery_low"
+  },
+  {
+    "sensor_id": "TH_F2_01",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "type": "temperature",
+    "grid_row": 3,
+    "grid_col": 1,
+    "status": "online"
+  },
+  {
+    "sensor_id": "TH_F2_02",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "type": "humidity",
+    "grid_row": 4,
+    "grid_col": 3,
+    "status": "offline"
+  },
+  {
+    "sensor_id": "SM_F3_01",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "type": "soil_moisture",
+    "grid_row": 1,
+    "grid_col": 2,
+    "status": "online"
+  },
+  {
+    "sensor_id": "TH_F3_01",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "type": "temperature",
+    "grid_row": 3,
+    "grid_col": 2,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F4_01",
+    "field_id": "field_4",
+    "farm_id": "farm_2",
+    "type": "soil_moisture",
+    "grid_row": 1,
+    "grid_col": 2,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F4_02",
+    "field_id": "field_4",
+    "farm_id": "farm_2",
+    "type": "soil_moisture",
+    "grid_row": 2,
+    "grid_col": 1,
+    "status": "online"
+  },
+  {
+    "sensor_id": "TH_F4_01",
+    "field_id": "field_4",
+    "farm_id": "farm_2",
+    "type": "temperature",
+    "grid_row": 3,
+    "grid_col": 3,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F5_01",
+    "field_id": "field_5",
+    "farm_id": "farm_2",
+    "type": "soil_moisture",
+    "grid_row": 1,
+    "grid_col": 1,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F5_02",
+    "field_id": "field_5",
+    "farm_id": "farm_2",
+    "type": "soil_moisture",
+    "grid_row": 2,
+    "grid_col": 3,
+    "status": "battery_low"
+  },
+  {
+    "sensor_id": "TH_F5_01",
+    "field_id": "field_5",
+    "farm_id": "farm_2",
+    "type": "temperature",
+    "grid_row": 3,
+    "grid_col": 2,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F6_01",
+    "field_id": "field_6",
+    "farm_id": "farm_2",
+    "type": "soil_moisture",
+    "grid_row": 1,
+    "grid_col": 1,
+    "status": "online"
+  },
+  {
+    "sensor_id": "TH_F6_01",
+    "field_id": "field_6",
+    "farm_id": "farm_2",
+    "type": "temperature",
+    "grid_row": 2,
+    "grid_col": 2,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F7_01",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "type": "soil_moisture",
+    "grid_row": 1,
+    "grid_col": 2,
+    "status": "online"
+  },
+  {
+    "sensor_id": "TH_F7_01",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "type": "temperature",
+    "grid_row": 2,
+    "grid_col": 1,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F8_01",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "type": "soil_moisture",
+    "grid_row": 1,
+    "grid_col": 1,
+    "status": "offline"
+  },
+  {
+    "sensor_id": "TH_F8_01",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "type": "temperature",
+    "grid_row": 2,
+    "grid_col": 2,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F9_01",
+    "field_id": "field_9",
+    "farm_id": "farm_3",
+    "type": "soil_moisture",
+    "grid_row": 1,
+    "grid_col": 2,
+    "status": "online"
+  },
+  {
+    "sensor_id": "SM_F9_02",
+    "field_id": "field_9",
+    "farm_id": "farm_3",
+    "type": "soil_moisture",
+    "grid_row": 2,
+    "grid_col": 1,
+    "status": "online"
+  },
+  {
+    "sensor_id": "TH_F9_01",
+    "field_id": "field_9",
+    "farm_id": "farm_3",
+    "type": "temperature",
+    "grid_row": 3,
+    "grid_col": 3,
+    "status": "battery_low"
+  },
+  {
+    "sensor_id": "SM_F10_01",
+    "field_id": "field_10",
+    "farm_id": "farm_3",
+    "type": "soil_moisture",
+    "grid_row": 1,
+    "grid_col": 1,
+    "status": "online"
+  },
+  {
+    "sensor_id": "TH_F10_01",
+    "field_id": "field_10",
+    "farm_id": "farm_3",
+    "type": "temperature",
+    "grid_row": 2,
+    "grid_col": 2,
+    "status": "online"
+  }
+]
