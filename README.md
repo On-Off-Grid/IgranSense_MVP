@@ -9,7 +9,7 @@ IgranSense is an edge-computing IoT platform that helps farmers optimize irrigat
 
 > **🚀 New here?** Check out [QUICKSTART.md](QUICKSTART.md) for a 5-minute setup guide!
 
-![Farm Overview](screenshots_frontend/farmview_page.png)
+![Farm Overview](screenshots_frontend/farmer_dashboard.png)
 
 ## 🎯 Features
 
@@ -22,11 +22,24 @@ IgranSense is an edge-computing IoT platform that helps farmers optimize irrigat
 - **Multi-Farm Support** - Enterprise users can manage multiple farms
 - **Sensor Registry** - Device inventory with status tracking and diagnostics
 
+## 📚 Team Documentation
+
+| Team | README Location | Responsibility |
+|------|-----------------|----------------|
+| **Frontend** | [frontend/README.md](frontend/README.md) | React dashboard, UI components, API client |
+| **Backend** | [backend/souhail-edge-sim/README.md](backend/souhail-edge-sim/README.md) | FastAPI server, REST endpoints, data files |
+
+> **Important:** Each team should update their respective README when adding features. Coordinate API changes to maintain compatibility.
+
 ## 📸 Screenshots
 
-| Farm Overview | Field Detail | System Status |
-|---------------|--------------|---------------|
-| ![Map](screenshots_frontend/farmview_page.png) | Soil moisture & NDVI charts | ![System](screenshots_frontend/system_page.png) |
+| Farm Dashboard | Field Details | System Status |
+|----------------|---------------|---------------|
+| ![Dashboard](screenshots_frontend/farmer_dashboard.png) | ![Field](screenshots_frontend/field_details.png) | ![System](screenshots_frontend/system_page.png) |
+
+| Enterprise Alerts | Sensors Page | Admin Panel |
+|-------------------|--------------|-------------|
+| ![Alerts](screenshots_frontend/enterprise_alerts.png) | ![Sensors](screenshots_frontend/sensors_page.png) | ![Admin](screenshots_frontend/admin_diagnostics.png) |
 
 ## 🏗️ Architecture
 
@@ -364,9 +377,16 @@ IgranSense_MVP/
 │   ├── quick_ref.md               # Quick reference guide
 │   └── MVP_SPRINT_PLAN.md         # Development roadmap
 ├── screenshots_frontend/          # Application screenshots
-│   ├── farmview_page.png
-│   ├── alerts_page.png
-│   └── system_page.png
+│   ├── farmer_dashboard.png       # Main farm overview
+│   ├── enterprise_dashboard.png   # Enterprise multi-farm view
+│   ├── field_details.png          # Field detail with charts
+│   ├── enterprise_alerts.png      # Alerts list view
+│   ├── sensors_page.png           # Sensor registry
+│   ├── system_page.png            # System status
+│   ├── login_page.png             # Login screen
+│   ├── admin_users.png            # Admin user management
+│   ├── admin_organizations.png    # Admin org management
+│   └── admin_diagnostics.png      # Admin diagnostics
 ├── .gitignore                     # Git ignore rules
 ├── LICENSE                        # MIT License
 ├── README.md                      # This file
