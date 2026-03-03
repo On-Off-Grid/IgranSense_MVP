@@ -67,17 +67,31 @@ souhail-edge-sim/
 │   │   ├── auth.py          # JWT auth, password hashing
 │   │   ├── data_loader.py   # Read JSON data files
 │   │   ├── rule_engine.py   # Field status & alert logic
-│   │   └── system_health.py # MDC & sensor health summary
+│   │   ├── system_health.py # MDC & sensor health summary
+│   │   ├── water.py         # Irrigation water KPI service (v2.1)
+│   │   └── weather.py       # Weather & risk service (v2.1)
 │   └── utils/
 │       ├── __init__.py
 │       └── time_utils.py    # Time helpers
+├── tests/                   # pytest test suite (v2.1)
+│   ├── conftest.py          # Shared fixtures (TestClient)
+│   ├── test_health.py       # Health endpoint tests
+│   ├── test_farms.py        # Farms endpoint tests
+│   ├── test_data_loader.py  # Data loader unit tests
+│   ├── test_water.py        # Water dashboard tests
+│   ├── test_weather_endpoint.py # Weather endpoint tests
+│   ├── test_field_detail.py # Field detail + triggers tests
+│   └── test_system_sensors.py # System & sensor tests
 └── data/
     ├── fields.json          # Field geometry & grid config
+    ├── farms.json           # Farm registry (v2.1)
     ├── sensors.json         # Sensor registry per field
     ├── readings.json        # 30-day sensor time series
     ├── ndvi_snapshots.json  # Weekly NDVI values per field
     ├── rules.json           # Agronomic thresholds
-    └── users.json           # Demo user accounts
+    ├── users.json           # Demo user accounts
+    ├── irrigation_events.json # Irrigation event log (v2.1)
+    └── weather.json         # Simulated weather data (v2.1)
 ```
 
 ## API Endpoints
@@ -89,12 +103,38 @@ souhail-edge-sim/
 | `POST` | `/auth/login` | Authenticate user, returns JWT token |
 | `GET` | `/auth/me` | Get current authenticated user |
 
+### Farms (v2.1)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/farms` | List all farms with field counts |
+
+### Water Dashboard (v2.1)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/water` | Irrigation KPIs, time series, moisture zones |
+
+**Query Parameters** for `GET /water`:
+- `farm_id` (optional): Filter by farm
+- `time_range` (optional): `24h`, `7d` (default), `30d`
+
+### Weather & Risk (v2.1)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/weather` | Current conditions, forecast, irrigation window |
+
+**Query Parameters** for `GET /weather`:
+- `farm_id` (optional): Filter by farm
+- `compact` (optional): `true` returns only current + window
+
 ### Fields
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `GET` | `/fields` | List all fields with geometry & status |
-| `GET` | `/fields/{field_id}` | Get field detail with time series |
+| `GET` | `/fields/{field_id}` | Field detail with time series, rule triggers & weather (v2.1) |
 
 **Query Parameters** for `GET /fields`:
 - `farm_id` (optional): Filter by farm (e.g., `farm_1`, `farm_2`, `farm_3`)
@@ -128,7 +168,7 @@ souhail-edge-sim/
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/system` | Get MDC status & sensor health summary |
+| `GET` | `/system` | MDC status, sensor health & MDC metrics (v2.1) |
 | `GET` | `/health` | Health check endpoint |
 
 ## Response Examples
@@ -177,7 +217,44 @@ souhail-edge-sim/
     "online": 10,
     "offline": 1,
     "battery_low": 1
+  },
+  "mdc_metrics": {
+    "cpu_pct": 38.2,
+    "memory_pct": 52.1,
+    "disk_pct": 44.7,
+    "requests_per_min": 120
   }
+}
+```
+
+### GET /water (v2.1)
+```json
+{
+  "kpis": { "total_volume_m3": 125.5, "efficiency_pct": 82.3, ... },
+  "time_series": [ { "date": "2026-02-25", "volume_m3": 18.2, ... } ],
+  "moisture_zones": [ { "field_id": "field_1", "zone": "deficit", ... } ]
+}
+```
+
+### GET /weather (v2.1)
+```json
+{
+  "current": { "temp_c": 24.5, "humidity_pct": 55, "wind_kmh": 12, ... },
+  "forecast": [ { "date": "2026-03-04", "high_c": 28, "low_c": 15, ... } ],
+  "irrigation_window": { "recommended": true, "reason": "Low wind, no rain" },
+  "historical_rainfall": [ { "month": "Jan", "mm": 32 } ]
+}
+```
+
+### GET /fields/{field_id} (v2.1 additions)
+```json
+{
+  "field": { ... },
+  "time_series": [...],
+  "triggers": [
+    { "rule_name": "soil_moisture_low", "severity": "critical", "current_value": 14.0, "threshold": 18.0, "message": "Irrigate immediately" }
+  ],
+  "weather": { "temp_c": 24.5, "humidity_pct": 55, ... }
 }
 ```
 
@@ -221,6 +298,33 @@ Rules are configurable in `data/rules.json`.
 Users are stored in `data/users.json` with bcrypt-hashed passwords.
 
 ## Data Files
+
+### farms.json (v2.1)
+Farm registry with names and regions:
+```json
+{
+  "farm_id": "farm_1",
+  "name": "Souss Prime",
+  "region": "Souss-Massa",
+  "field_ids": ["field_1", "field_2"]
+}
+```
+
+### irrigation_events.json (v2.1)
+Irrigation event log with volumes:
+```json
+{
+  "event_id": "evt_001",
+  "field_id": "field_1",
+  "date": "2026-02-28",
+  "volume_m3": 12.5,
+  "method": "drip",
+  "duration_min": 90
+}
+```
+
+### weather.json (v2.1)
+Simulated weather data including current conditions, 5-day forecast, and monthly rainfall history.
 
 ### fields.json
 Defines field geometry and sensor grid layout:
@@ -332,12 +436,15 @@ The frontend proxies requests from `/api/*` to this backend. Endpoint mapping:
 |------------------|------------------|
 | `login()` | `POST /auth/login` |
 | `getCurrentUser()` | `GET /auth/me` |
+| `getFarms()` | `GET /farms` |
 | `getFields()` | `GET /fields` |
 | `getFieldDetail()` | `GET /fields/{id}` |
 | `getAlerts()` | `GET /alerts` |
 | `getSystemStatus()` | `GET /system` |
 | `getSensors()` | `GET /sensors` |
 | `getSensorDetail()` | `GET /sensors/{id}` |
+| `getWaterDashboard()` | `GET /water` |
+| `getWeather()` | `GET /weather` |
 
 ## Troubleshooting
 
@@ -351,17 +458,53 @@ The frontend proxies requests from `/api/*` to this backend. Endpoint mapping:
 
 ## Testing
 
+### Automated Tests (pytest)
+
 ```bash
-# Test API is running
+# From backend/souhail-edge-sim, with virtual environment active
+pip install pytest httpx pytest-anyio   # one-time
+pytest -v                                # run all 50 tests
+pytest tests/test_water.py -v            # run one module
+```
+
+Test coverage:
+
+| Module | Tests | Covers |
+|--------|------:|--------|
+| `test_health.py` | 2 | Health endpoint |
+| `test_farms.py` | 3 | Farms endpoint |
+| `test_data_loader.py` | 16 | All data loaders |
+| `test_water.py` | 7 | Water dashboard KPIs & service |
+| `test_weather_endpoint.py` | 10 | Weather endpoint + compact mode |
+| `test_field_detail.py` | 7 | Field detail + rule triggers |
+| `test_system_sensors.py` | 5 | System MDC metrics + sparklines |
+| **Total** | **50** | |
+
+### Manual curl Tests
+
+```bash
+# Health check
 curl http://localhost:8000/
 
-# Test login
+# Login
 curl -X POST http://localhost:8000/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email": "farmer@demo.com", "password": "demo123"}'
 
-# Test fields endpoint
+# Farms (v2.1)
+curl http://localhost:8000/farms
+
+# Fields
 curl http://localhost:8000/fields
+
+# Water dashboard (v2.1)
+curl "http://localhost:8000/water?farm_id=farm_1&time_range=7d"
+
+# Weather (v2.1)
+curl "http://localhost:8000/weather?farm_id=farm_1"
+
+# Weather compact (v2.1)
+curl "http://localhost:8000/weather?compact=true"
 ```
 
 ## Contributing

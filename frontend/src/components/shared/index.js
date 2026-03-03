@@ -9,3 +9,4 @@ export { default as MapLegend } from './MapLegend';
 export { default as MetricCard } from './MetricCard';
 export { default as MetricCardSkeleton } from './MetricCardSkeleton';
 export { default as TimeRangeToggle } from './TimeRangeToggle';
+export { default as WeatherIcon } from './WeatherIcon';

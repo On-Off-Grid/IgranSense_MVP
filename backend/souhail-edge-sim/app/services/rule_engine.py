@@ -10,6 +10,7 @@ from ..models import (
     FieldWithGeometry,
     SensorResponse,
     Alert,
+    RuleTrigger,
 )
 from .data_loader import (
     load_rules,
@@ -216,3 +217,63 @@ def compute_all_alerts(farm_id: str = None) -> List[Alert]:
     all_alerts.sort(key=lambda a: (severity_order[a.severity], -a.timestamp.timestamp()))
     
     return all_alerts
+
+
+# ---------------------------------------------------------------------------
+# Rule trigger computation (v2.1 — Field Detail enhancement)
+# ---------------------------------------------------------------------------
+
+def compute_rule_triggers(field_id: str) -> List[RuleTrigger]:
+    """
+    Evaluate all agronomic rules for a field and return every trigger that fired.
+
+    Unlike ``generate_alerts_for_field`` (which stops at the first soil rule
+    match and returns ``Alert`` objects), this function returns lightweight
+    ``RuleTrigger`` objects for *every* matching rule — suitable for the
+    "Why this recommendation?" explainer on the Field Detail page.
+    """
+    rules = load_rules()
+    soil_moisture = get_latest_soil_moisture(field_id)
+    ndvi = get_latest_ndvi(field_id)
+    ndvi_trend_drop = calculate_ndvi_trend_drop(field_id)
+
+    triggers: List[RuleTrigger] = []
+
+    # Soil moisture rules
+    for rule in rules.soil_moisture_rules:
+        min_ok = rule.min_inclusive is None or soil_moisture >= rule.min_inclusive
+        max_ok = rule.max_exclusive is None or soil_moisture < rule.max_exclusive
+        if min_ok and max_ok:
+            triggers.append(RuleTrigger(
+                rule_type="soil_moisture",
+                threshold=rule.max_exclusive if rule.max_exclusive else (rule.min_inclusive or 0),
+                actual_value=round(soil_moisture, 2),
+                severity=rule.severity.value,
+                message=rule.recommendation,
+            ))
+            break  # first matching soil moisture rule wins
+
+    # NDVI trend rules
+    for rule in rules.ndvi_trend_rules:
+        if ndvi_trend_drop >= rule.drop_pct_threshold:
+            triggers.append(RuleTrigger(
+                rule_type="ndvi_trend",
+                threshold=rule.drop_pct_threshold,
+                actual_value=round(ndvi_trend_drop, 2),
+                severity=rule.severity.value,
+                message=rule.recommendation,
+            ))
+
+    # NDVI absolute rules
+    for rule in rules.ndvi_absolute_rules:
+        if ndvi < rule.min_ndvi:
+            triggers.append(RuleTrigger(
+                rule_type="ndvi_absolute",
+                threshold=rule.min_ndvi,
+                actual_value=round(ndvi, 4),
+                severity=rule.severity.value,
+                message=rule.recommendation,
+            ))
+
+    return triggers
+

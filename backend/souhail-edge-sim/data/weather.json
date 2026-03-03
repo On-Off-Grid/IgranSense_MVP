@@ -1,0 +1,248 @@
+{
+  "farm_1": {
+    "farm_id": "farm_1",
+    "current": {
+      "temperature_c": 15.8,
+      "humidity_pct": 57,
+      "wind_speed_kmh": 17.0,
+      "conditions": "partly_cloudy",
+      "rainfall_mm_today": 1.1,
+      "timestamp": "2026-02-28T14:00:00Z"
+    },
+    "forecast": [
+      {
+        "date": "2026-03-01",
+        "high_c": 19.8,
+        "low_c": 13.6,
+        "conditions": "cloudy",
+        "rain_probability_pct": 31,
+        "wind_speed_kmh": 19.0,
+        "humidity_pct": 50
+      },
+      {
+        "date": "2026-03-02",
+        "high_c": 17.4,
+        "low_c": 12.7,
+        "conditions": "cloudy",
+        "rain_probability_pct": 27,
+        "wind_speed_kmh": 9.3,
+        "humidity_pct": 68
+      },
+      {
+        "date": "2026-03-03",
+        "high_c": 15.7,
+        "low_c": 11.2,
+        "conditions": "cloudy",
+        "rain_probability_pct": 58,
+        "wind_speed_kmh": 8.6,
+        "humidity_pct": 66
+      },
+      {
+        "date": "2026-03-04",
+        "high_c": 18.2,
+        "low_c": 14.0,
+        "conditions": "cloudy",
+        "rain_probability_pct": 60,
+        "wind_speed_kmh": 14.4,
+        "humidity_pct": 70
+      },
+      {
+        "date": "2026-03-05",
+        "high_c": 18.5,
+        "low_c": 12.3,
+        "conditions": "partly_cloudy",
+        "rain_probability_pct": 32,
+        "wind_speed_kmh": 12.3,
+        "humidity_pct": 79
+      },
+      {
+        "date": "2026-03-06",
+        "high_c": 18.1,
+        "low_c": 11.0,
+        "conditions": "rainy",
+        "rain_probability_pct": 44,
+        "wind_speed_kmh": 14.3,
+        "humidity_pct": 48
+      },
+      {
+        "date": "2026-03-07",
+        "high_c": 15.7,
+        "low_c": 12.5,
+        "conditions": "partly_cloudy",
+        "rain_probability_pct": 23,
+        "wind_speed_kmh": 8.2,
+        "humidity_pct": 73
+      }
+    ],
+    "historical": {
+      "cumulative_rainfall_mm": 128,
+      "seasonal_average_mm": 145,
+      "period_start": "2025-10-01",
+      "period_end": "2026-02-28"
+    }
+  },
+  "farm_2": {
+    "farm_id": "farm_2",
+    "current": {
+      "temperature_c": 17.8,
+      "humidity_pct": 76,
+      "wind_speed_kmh": 12.8,
+      "conditions": "rainy",
+      "rainfall_mm_today": 1.4,
+      "timestamp": "2026-02-28T14:00:00Z"
+    },
+    "forecast": [
+      {
+        "date": "2026-03-01",
+        "high_c": 19.7,
+        "low_c": 14.6,
+        "conditions": "partly_cloudy",
+        "rain_probability_pct": 30,
+        "wind_speed_kmh": 11.9,
+        "humidity_pct": 74
+      },
+      {
+        "date": "2026-03-02",
+        "high_c": 16.6,
+        "low_c": 12.4,
+        "conditions": "cloudy",
+        "rain_probability_pct": 49,
+        "wind_speed_kmh": 13.4,
+        "humidity_pct": 80
+      },
+      {
+        "date": "2026-03-03",
+        "high_c": 16.1,
+        "low_c": 11.5,
+        "conditions": "rainy",
+        "rain_probability_pct": 65,
+        "wind_speed_kmh": 18.9,
+        "humidity_pct": 79
+      },
+      {
+        "date": "2026-03-04",
+        "high_c": 16.8,
+        "low_c": 12.9,
+        "conditions": "partly_cloudy",
+        "rain_probability_pct": 33,
+        "wind_speed_kmh": 32.9,
+        "humidity_pct": 59
+      },
+      {
+        "date": "2026-03-05",
+        "high_c": 19.7,
+        "low_c": 11.7,
+        "conditions": "rainy",
+        "rain_probability_pct": 63,
+        "wind_speed_kmh": 11.2,
+        "humidity_pct": 64
+      },
+      {
+        "date": "2026-03-06",
+        "high_c": 20.0,
+        "low_c": 13.5,
+        "conditions": "cloudy",
+        "rain_probability_pct": 36,
+        "wind_speed_kmh": 33.0,
+        "humidity_pct": 83
+      },
+      {
+        "date": "2026-03-07",
+        "high_c": 19.0,
+        "low_c": 15.2,
+        "conditions": "rainy",
+        "rain_probability_pct": 56,
+        "wind_speed_kmh": 11.2,
+        "humidity_pct": 81
+      }
+    ],
+    "historical": {
+      "cumulative_rainfall_mm": 162,
+      "seasonal_average_mm": 180,
+      "period_start": "2025-10-01",
+      "period_end": "2026-02-28"
+    }
+  },
+  "farm_3": {
+    "farm_id": "farm_3",
+    "current": {
+      "temperature_c": 13.6,
+      "humidity_pct": 22,
+      "wind_speed_kmh": 12.5,
+      "conditions": "rainy",
+      "rainfall_mm_today": 6.7,
+      "timestamp": "2026-02-28T14:00:00Z"
+    },
+    "forecast": [
+      {
+        "date": "2026-03-01",
+        "high_c": 15.2,
+        "low_c": 9.7,
+        "conditions": "partly_cloudy",
+        "rain_probability_pct": 11,
+        "wind_speed_kmh": 17.3,
+        "humidity_pct": 32
+      },
+      {
+        "date": "2026-03-02",
+        "high_c": 24.2,
+        "low_c": 15.1,
+        "conditions": "partly_cloudy",
+        "rain_probability_pct": 16,
+        "wind_speed_kmh": 7.7,
+        "humidity_pct": 21
+      },
+      {
+        "date": "2026-03-03",
+        "high_c": 23.6,
+        "low_c": 10.9,
+        "conditions": "partly_cloudy",
+        "rain_probability_pct": 15,
+        "wind_speed_kmh": 17.8,
+        "humidity_pct": 27
+      },
+      {
+        "date": "2026-03-04",
+        "high_c": 25.1,
+        "low_c": 18.2,
+        "conditions": "sunny",
+        "rain_probability_pct": 5,
+        "wind_speed_kmh": 8.3,
+        "humidity_pct": 45
+      },
+      {
+        "date": "2026-03-05",
+        "high_c": 16.4,
+        "low_c": 12.1,
+        "conditions": "partly_cloudy",
+        "rain_probability_pct": 14,
+        "wind_speed_kmh": 6.2,
+        "humidity_pct": 34
+      },
+      {
+        "date": "2026-03-06",
+        "high_c": 13.0,
+        "low_c": 8.6,
+        "conditions": "partly_cloudy",
+        "rain_probability_pct": 6,
+        "wind_speed_kmh": 15.3,
+        "humidity_pct": 30
+      },
+      {
+        "date": "2026-03-07",
+        "high_c": 13.9,
+        "low_c": 10.6,
+        "conditions": "cloudy",
+        "rain_probability_pct": 24,
+        "wind_speed_kmh": 11.5,
+        "humidity_pct": 29
+      }
+    ],
+    "historical": {
+      "cumulative_rainfall_mm": 38,
+      "seasonal_average_mm": 55,
+      "period_start": "2025-10-01",
+      "period_end": "2026-02-28"
+    }
+  }
+}

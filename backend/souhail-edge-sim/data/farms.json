@@ -1,0 +1,26 @@
+[
+  {
+    "farm_id": "farm_1",
+    "name": "North Valley Farm",
+    "region": "Fes-Meknes, Morocco",
+    "field_count": 3,
+    "status": "online",
+    "coordinates": { "lat": 34.0181, "lng": -5.0078 }
+  },
+  {
+    "farm_id": "farm_2",
+    "name": "Coastal Olive Grove",
+    "region": "Tangier-Tetouan, Morocco",
+    "field_count": 5,
+    "status": "online",
+    "coordinates": { "lat": 35.7595, "lng": -5.8340 }
+  },
+  {
+    "farm_id": "farm_3",
+    "name": "Atlas Highlands Farm",
+    "region": "Draa-Tafilalet, Morocco",
+    "field_count": 2,
+    "status": "offline",
+    "coordinates": { "lat": 31.9314, "lng": -5.6200 }
+  }
+]

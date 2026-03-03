@@ -99,6 +99,18 @@ export async function getCurrentUser(token) {
 }
 
 // =============================================================================
+// Farm Endpoints
+// =============================================================================
+
+/**
+ * Get list of all farms
+ * @returns {Promise<Array>} List of farm objects
+ */
+export async function getFarms() {
+  return fetchAPI('/farms');
+}
+
+// =============================================================================
 // Data Endpoints
 // =============================================================================
 
@@ -208,9 +220,41 @@ export async function getSensorDetail(sensorId) {
   return fetchAPI(`/sensors/${sensorId}`);
 }
 
+// =============================================================================
+// Water / Irrigation Endpoints
+// =============================================================================
+
+/**
+ * Get irrigation & water dashboard for a farm
+ * @param {string} farmId - Farm ID (required)
+ * @param {string} [timeRange='7d'] - "today" | "7d" | "30d" | "season"
+ * @returns {Promise<Object>} { kpis, irrigation_series, moisture_zones, time_range }
+ */
+export async function getWaterDashboard(farmId, timeRange = '7d') {
+  const params = new URLSearchParams({ farm_id: farmId, time_range: timeRange });
+  return fetchAPI(`/water?${params}`);
+}
+
+// =============================================================================
+// Weather & Risk Endpoints
+// =============================================================================
+
+/**
+ * Get weather & risk dashboard for a farm
+ * @param {string} farmId - Farm ID (required)
+ * @param {boolean} [compact=false] - If true, return only 3-day forecast for widgets
+ * @returns {Promise<Object>} { farm_id, current, forecast, irrigation_window, historical }
+ */
+export async function getWeather(farmId, compact = false) {
+  const params = new URLSearchParams({ farm_id: farmId });
+  if (compact) params.append('compact', 'true');
+  return fetchAPI(`/weather?${params}`);
+}
+
 export default {
   login,
   getCurrentUser,
+  getFarms,
   getFields,
   getFieldDetail,
   getAlerts,
@@ -220,4 +264,6 @@ export default {
   getSystemStatus,
   getSensors,
   getSensorDetail,
+  getWaterDashboard,
+  getWeather,
 };

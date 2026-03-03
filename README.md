@@ -4,23 +4,44 @@
 
 [![TRL](https://img.shields.io/badge/TRL-4-blue)](docs/trl_statement.md)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/Tests-112_passing-brightgreen)]()
 
 IgranSense is an edge-computing IoT platform that helps farmers optimize irrigation decisions using real-time soil moisture monitoring, satellite-derived vegetation indices (NDVI), and agronomic rule-based recommendations.
 
 > **🚀 New here?** Check out [QUICKSTART.md](QUICKSTART.md) for a 5-minute setup guide!
 
-![Farm Overview](screenshots_frontend/farmer_dashboard.png)
+![Farm Dashboard](screenshots_frontend/dashboard.png)
 
 ## 🎯 Features
 
-- **Real-time Monitoring** - Track soil moisture, temperature, and humidity across multiple fields
-- **Smart Alerts** - Automated irrigation recommendations based on FAO-56 thresholds
-- **NDVI Integration** - Weekly satellite imagery analysis for crop health assessment
-- **Edge Computing** - Works offline; processes data locally without internet dependency
-- **Visual Dashboard** - Interactive maps and time-series charts for field analysis
-- **Role-Based Access** - Four user roles: Local Farm, Farmer, Enterprise, Admin
-- **Multi-Farm Support** - Enterprise users can manage multiple farms
-- **Sensor Registry** - Device inventory with status tracking and diagnostics
+- **Real-time Monitoring** — Track soil moisture, temperature, and humidity across multiple fields
+- **Smart Alerts** — Automated irrigation recommendations based on FAO-56 thresholds
+- **NDVI Integration** — Weekly satellite imagery analysis for crop health assessment
+- **Edge Computing** — Works offline; processes data locally without internet dependency
+- **Visual Dashboard** — Interactive maps and time-series charts for field analysis
+- **Role-Based Access** — Four user roles: Local Farm, Farmer, Enterprise, Admin
+- **Multi-Farm Support** — Enterprise users can manage multiple farms
+- **Sensor Registry** — Device inventory with status tracking and diagnostics
+- **Collapsible Sidebar** — Icon-only navigation that expands on hover; mobile-friendly drawer
+
+### v2.2 — Navigation Overhaul
+
+- **Collapsible Sidebar** — Icon-only by default (`w-16`), expands to full width on hover with smooth transitions
+- **Slim Header Bar** — Fixed top banner showing only 🌱 logo + "IgranSense" + farm selector
+- **Mobile Drawer** — Hamburger menu slides the sidebar in as an overlay on small screens
+- **Edge Status in Sidebar** — Connection indicator moved from top bar to sidebar bottom
+- **User & Logout in Sidebar** — Avatar, email, role badge, and sign-out moved to sidebar footer
+
+### v2.1 — Dashboard Upgrade
+
+- **Irrigation & Water Page** — Water KPIs, stacked irrigation/rainfall chart, moisture zone summary
+- **Weather & Risk Page** — Current conditions, 5-day forecast, irrigation window, monthly rainfall history
+- **Enriched Field Detail** — Threshold reference bands on charts, rule-trigger explainer, inline weather card
+- **Improved Alerts UX** — Time-range toggle (24h/7d/30d), alert aggregation by (type, severity)
+- **Sensor & System Polish** — Sort dropdown, sparklines, MDC CPU/Memory/Disk metrics strip, edge banner
+- **Admin OrgManager KPIs** — Per-org critical-fields and offline-sensors columns
+- **Role-Aware Navigation** — Default landing per role, route-level access guard, enterprise cross-farm summary
+- **Full Test Suite** — 50 backend (pytest) + 62 frontend (vitest) = 112 automated tests
 
 ## 📚 Team Documentation
 
@@ -33,13 +54,17 @@ IgranSense is an edge-computing IoT platform that helps farmers optimize irrigat
 
 ## 📸 Screenshots
 
-| Farm Dashboard | Field Details | System Status |
-|----------------|---------------|---------------|
-| ![Dashboard](screenshots_frontend/farmer_dashboard.png) | ![Field](screenshots_frontend/field_details.png) | ![System](screenshots_frontend/system_page.png) |
+| Farm Dashboard | Irrigation & Water | Weather & Risk |
+|----------------|-------------------|----------------|
+| ![Dashboard](screenshots_frontend/dashboard.png) | ![Irrigation](screenshots_frontend/Irrigation.png) | ![Weather](screenshots_frontend/weather.png) |
 
-| Enterprise Alerts | Sensors Page | Admin Panel |
-|-------------------|--------------|-------------|
-| ![Alerts](screenshots_frontend/enterprise_alerts.png) | ![Sensors](screenshots_frontend/sensors_page.png) | ![Admin](screenshots_frontend/admin_diagnostics.png) |
+| Alerts | Sensors | System Status |
+|--------|---------|---------------|
+| ![Alerts](screenshots_frontend/alerts.png) | ![Sensors](screenshots_frontend/sensors.png) | ![System](screenshots_frontend/system.png) |
+
+| Admin Diagnostics | Admin Organisations | Admin Users |
+|--------------------|---------------------|-------------|
+| ![Diagnostics](screenshots_frontend/admin_diagnostics.png) | ![Orgs](screenshots_frontend/admin_organisations.png) | ![Users](screenshots_frontend/admin_users.png) |
 
 ## 🏗️ Architecture
 
@@ -196,23 +221,14 @@ Log in with any of these pre-configured accounts to explore different role capab
 
 Once logged in, try these actions:
 
-1. **Farm Overview** - Click colored field markers to see details
-   - 🟢 Green = Healthy, 🟡 Yellow = Warning, 🔴 Red = Critical
-
-2. **Field Detail** - View historical data:
-   - 30-day soil moisture trends
-   - Temperature time-series
-   - Weekly NDVI bar charts
-
-3. **Alerts Page** - Check irrigation recommendations
-   - Sorted by severity (Critical → Warning → Info)
-
-4. **System Status** - Monitor edge gateway and sensor health
-
-5. **Admin Panel** (admin role only):
-   - User management
-   - Organization configuration
-   - System diagnostics
+1. **Farm Overview** — Click colored field markers to see details (🟢 Healthy, 🟡 Warning, 🔴 Critical)
+2. **Field Detail** — View 30-day soil moisture, temperature, and NDVI time series
+3. **Irrigation & Water** — Water KPIs, irrigation/rainfall chart, moisture zones
+4. **Weather & Risk** — Current conditions, irrigation window, 5-day forecast, monthly rainfall
+5. **Alerts** — Severity-sorted alerts with time-range and aggregation controls
+6. **Sensors** — Full device inventory with sparklines and status
+7. **System Status** — Edge gateway health, MDC metrics
+8. **Admin Panel** (admin role only) — Users, Organizations (with per-org KPIs), Diagnostics
 
 ## 🛠️ Troubleshooting
 
@@ -327,70 +343,55 @@ IgranSense_MVP/
 │       │   │   ├── auth.py        # JWT authentication
 │       │   │   ├── data_loader.py # JSON data loading
 │       │   │   ├── rule_engine.py # Agronomic rules engine
-│       │   │   └── system_health.py # System monitoring
+│       │   │   ├── system_health.py # System monitoring
+│       │   │   ├── water.py       # Irrigation KPI service
+│       │   │   └── weather.py     # Weather & risk service
 │       │   └── utils/
 │       │       └── time_utils.py  # Date/time utilities
 │       ├── data/                  # JSON database files
-│       │   ├── sensors.json       # Sensor inventory
-│       │   ├── readings.json      # Historical sensor readings
-│       │   ├── ndvi_snapshots.json # Satellite imagery data
-│       │   ├── rules.json         # Agronomic threshold rules
-│       │   ├── fields.json        # Field configurations
-│       │   └── users.json         # User accounts
-│       ├── requirements.txt       # Python dependencies
+│       ├── tests/                 # 50 pytest tests
+│       ├── requirements.txt
 │       └── README.md
 ├── frontend/                      # React dashboard application
 │   ├── src/
-│   │   ├── App.jsx                # Main application component
+│   │   ├── App.jsx                # App shell, routing, offline context
 │   │   ├── main.jsx               # Entry point
-│   │   ├── components/            # React UI components
+│   │   ├── components/
+│   │   │   ├── Header.jsx         # Fixed top bar (logo + farm selector)
+│   │   │   ├── Sidebar.jsx        # Collapsible nav sidebar + mobile drawer
 │   │   │   ├── FarmOverview.jsx   # Interactive map view
 │   │   │   ├── FieldDetail.jsx    # Single field analysis
 │   │   │   ├── AlertsList.jsx     # Irrigation alerts
 │   │   │   ├── SystemStatus.jsx   # Edge MDC monitoring
 │   │   │   ├── SensorRegistry.jsx # Device inventory
-│   │   │   ├── auth/              # Authentication components
-│   │   │   ├── shared/            # Reusable UI elements
-│   │   │   └── ...
-│   │   ├── pages/                 # Page components
-│   │   │   ├── LoginPage.jsx      # Authentication page
-│   │   │   └── admin/             # Admin panel pages
-│   │   ├── context/               # React Context providers
-│   │   │   ├── AuthContext.jsx    # Auth state management
-│   │   │   └── FarmContext.jsx    # Farm data management
-│   │   ├── api/
-│   │   │   └── client.js          # API client wrapper
-│   │   ├── styles/
-│   │   │   └── tokens.js          # Design system tokens
-│   │   └── utils/
-│   │       └── rolePermissions.js # Role-based access control
-│   ├── public/                    # Static assets
-│   ├── package.json               # Node.js dependencies
-│   ├── vite.config.js             # Vite configuration
-│   └── index.html                 # HTML entry point
-├── scripts/
-│   └── generate_mock_data.py      # 30-day data generator
-├── docs/                          # Documentation
-│   ├── scientific_basis.md        # Agronomic methodology
-│   ├── trl_statement.md           # Technology readiness level
-│   ├── hardware_spec.md           # Bill of materials
-│   ├── quick_ref.md               # Quick reference guide
-│   └── MVP_SPRINT_PLAN.md         # Development roadmap
+│   │   │   ├── IrrigationWater.jsx # Water dashboard
+│   │   │   ├── WeatherRisk.jsx    # Weather & risk dashboard
+│   │   │   ├── auth/              # PrivateRoute, barrel export
+│   │   │   ├── shared/            # Card, KPIStrip, MetricCard, etc.
+│   │   │   └── ...                # AlertCard, SensorSparkline, etc.
+│   │   ├── pages/
+│   │   │   ├── LoginPage.jsx
+│   │   │   └── admin/             # OrgManager, UserManager, Diagnostics
+│   │   ├── layouts/
+│   │   │   └── AdminLayout.jsx    # Admin sub-navigation sidebar
+│   │   ├── context/               # AuthContext, FarmContext
+│   │   ├── api/client.js          # API client wrapper
+│   │   ├── styles/tokens.js       # Design system tokens
+│   │   └── utils/rolePermissions.js
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── vitest.config.js
+│   └── index.html
+├── scripts/                       # Data generation scripts
+├── docs/                          # Project documentation
 ├── screenshots_frontend/          # Application screenshots
-│   ├── farmer_dashboard.png       # Main farm overview
-│   ├── enterprise_dashboard.png   # Enterprise multi-farm view
-│   ├── field_details.png          # Field detail with charts
-│   ├── enterprise_alerts.png      # Alerts list view
-│   ├── sensors_page.png           # Sensor registry
-│   ├── system_page.png            # System status
-│   ├── login_page.png             # Login screen
-│   ├── admin_users.png            # Admin user management
-│   ├── admin_organizations.png    # Admin org management
-│   └── admin_diagnostics.png      # Admin diagnostics
-├── .gitignore                     # Git ignore rules
+├── .gitignore
 ├── LICENSE                        # MIT License
 ├── README.md                      # This file
-└── SETUP.md                       # Detailed setup guide
+├── QUICKSTART.md
+├── SETUP.md
+├── CONTRIBUTING.md
+└── CHANGELOG.md
 ```
 
 ## 🔌 API Endpoints
@@ -402,10 +403,13 @@ The backend exposes these REST API endpoints:
 | `/health` | GET | Health check | ❌ |
 | `/auth/login` | POST | User authentication | ❌ |
 | `/auth/me` | GET | Get current user | ✅ |
+| `/farms` | GET | List farms (v2.1) | ❌ |
 | `/fields` | GET | List all fields with status | ✅ |
-| `/fields/{id}` | GET | Get field details & history | ✅ |
+| `/fields/{id}` | GET | Field details + triggers + weather (v2.1) | ✅ |
 | `/alerts` | GET | Active irrigation alerts | ✅ |
-| `/system` | GET | MDC & sensor health | ✅ |
+| `/water` | GET | Water dashboard KPIs (v2.1) | ❌ |
+| `/weather` | GET | Weather & risk data (v2.1) | ❌ |
+| `/system` | GET | MDC health + metrics (v2.1) | ✅ |
 | `/sensors` | GET | Sensor inventory | ✅ |
 | `/users` | GET | List users (admin only) | ✅ |
 
@@ -482,9 +486,11 @@ See [docs/scientific_basis.md](docs/scientific_basis.md) for details.
 - [x] Sensor registry with device inventory
 - [x] Admin panel (users, organizations, diagnostics)
 - [x] Enhanced UX with design tokens
+- [x] v2.1 Dashboard upgrade (water, weather, field enrichment, alerts, role nav)
+- [x] Automated test suite (50 backend + 62 frontend)
+- [x] v2.2 Sidebar navigation + slim header + mobile drawer
 - [ ] ESP32 firmware development
 - [ ] Real sensor integration
-- [ ] Mobile responsive design improvements
 - [ ] Cloud sync for enterprise deployments
 - [ ] WebSocket real-time updates
 - [ ] Data export (CSV/PDF reports)
@@ -501,17 +507,18 @@ uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 # Run tests (if implemented)
 pytest
-
-# Check code formatting
-black app/
-flake8 app/
 ```
+
+Backend: **50 automated tests** covering all endpoints, data loaders, and services.
 
 ### Frontend Development
 
 ```bash
 # Run with HMR (Hot Module Replacement)
 npm run dev
+
+# Run vitest test suite
+npm test
 
 # Build for production
 npm run build
@@ -522,6 +529,8 @@ npm run preview
 # Lint code
 npm run lint
 ```
+
+Frontend: **62 automated tests** covering all v2.1 components and role permissions.
 
 ### Adding New Features
 
@@ -553,15 +562,15 @@ Contributions are welcome! Please follow these guidelines:
 
 ## 📚 Additional Resources
 
-- **[QUICKSTART.md](QUICKSTART.md)** - Get running in 5 minutes!
-- **[SETUP.md](SETUP.md)** - Detailed setup and testing guide
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
-- [docs/scientific_basis.md](docs/scientific_basis.md) - Agronomic methodology
-- [docs/trl_statement.md](docs/trl_statement.md) - Technology readiness level
-- [docs/hardware_spec.md](docs/hardware_spec.md) - Hardware specifications
-- [docs/MVP_SPRINT_PLAN.md](docs/MVP_SPRINT_PLAN.md) - Development roadmap
-- [backend/Edge API Design.md](backend/Edge%20API%20Design.md) - API design document
-- [launch.md](launch.md) - Quick launch commands reference
+- [QUICKSTART.md](QUICKSTART.md) — Get running in 5 minutes
+- [SETUP.md](SETUP.md) — Detailed setup and testing guide
+- [CONTRIBUTING.md](CONTRIBUTING.md) — Contribution guidelines
+- [CHANGELOG.md](CHANGELOG.md) — Release history
+- [docs/scientific_basis.md](docs/scientific_basis.md) — Agronomic methodology
+- [docs/trl_statement.md](docs/trl_statement.md) — Technology readiness level
+- [docs/hardware_spec.md](docs/hardware_spec.md) — Hardware specifications
+- [docs/MVP_SPRINT_PLAN.md](docs/MVP_SPRINT_PLAN.md) — Development roadmap
+- [backend/Edge API Design.md](backend/Edge%20API%20Design.md) — API design document
 
 ## ❓ FAQ
 

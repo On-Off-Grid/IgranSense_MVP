@@ -1,8 +1,9 @@
 """System health monitoring utilities."""
 
 from datetime import datetime, timezone, timedelta
+from random import uniform
 
-from ..models import SystemStatus, SensorHealthSummary
+from ..models import SystemStatus, SensorHealthSummary, MDCMetrics
 from .data_loader import load_sensors
 
 
@@ -23,6 +24,16 @@ def compute_sensor_health() -> SensorHealthSummary:
     )
 
 
+def compute_mdc_metrics() -> MDCMetrics:
+    """Generate simulated Edge MDC hardware metrics."""
+    return MDCMetrics(
+        cpu_pct=round(uniform(8, 35), 1),
+        memory_pct=round(uniform(25, 55), 1),
+        disk_pct=round(uniform(12, 40), 1),
+        requests_per_min=round(uniform(20, 120), 0),
+    )
+
+
 def compute_system_status() -> SystemStatus:
     """Compute overall system status."""
     sensor_health = compute_sensor_health()
@@ -38,4 +49,5 @@ def compute_system_status() -> SystemStatus:
         mdc_status=mdc_status,
         last_sync=last_sync,
         sensor_health_summary=sensor_health,
+        mdc_metrics=compute_mdc_metrics(),
     )

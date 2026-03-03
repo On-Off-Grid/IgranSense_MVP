@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getSystemStatus } from '../api/client';
 import { cardClasses } from '../styles/tokens';
-import { LoadingSpinner, ErrorBanner } from './shared';
+import { LoadingSpinner, ErrorBanner, MetricCard } from './shared';
 import SensorHealthBar from './SensorHealthBar';
 import MDCStatusCard from './MDCStatusCard';
 
@@ -31,11 +31,32 @@ export default function SystemStatus() {
     return <ErrorBanner message={error} />;
   }
 
-  const { mdc_status, last_sync, sensor_health_summary } = status;
+  const { mdc_status, last_sync, sensor_health_summary, mdc_metrics } = status;
 
   return (
-    <div>
+    <div data-testid="system-status">
       <h2 className="text-2xl font-bold text-white mb-6">System Status</h2>
+
+      {/* Edge Processing Banner */}
+      <div
+        data-testid="edge-banner"
+        className="mb-6 flex items-center gap-3 rounded-lg border border-green-700/40 bg-green-900/20 px-4 py-3"
+      >
+        <span className="text-lg">🖥️</span>
+        <span className="text-green-300 text-sm font-medium">
+          Edge processing active — no internet required
+        </span>
+      </div>
+
+      {/* MDC Metrics Strip */}
+      {mdc_metrics && (
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-testid="mdc-metrics-strip">
+          <MetricCard icon="🧠" label="CPU" value={mdc_metrics.cpu_pct} unit="%" status={mdc_metrics.cpu_pct > 80 ? 'critical' : mdc_metrics.cpu_pct > 60 ? 'warning' : 'ok'} />
+          <MetricCard icon="💾" label="Memory" value={mdc_metrics.memory_pct} unit="%" status={mdc_metrics.memory_pct > 80 ? 'critical' : mdc_metrics.memory_pct > 60 ? 'warning' : 'ok'} />
+          <MetricCard icon="📀" label="Disk" value={mdc_metrics.disk_pct} unit="%" status={mdc_metrics.disk_pct > 80 ? 'critical' : mdc_metrics.disk_pct > 60 ? 'warning' : 'ok'} />
+          <MetricCard icon="📡" label="Req/min" value={mdc_metrics.requests_per_min} unit="" />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* MDC Status Card */}

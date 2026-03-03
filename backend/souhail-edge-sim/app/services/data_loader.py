@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 from functools import lru_cache
 
 from ..config import DATA_DIR
-from ..models import Sensor, Reading, NDVISnapshot, RulesConfig, FieldData
+from ..models import Sensor, Reading, NDVISnapshot, RulesConfig, FieldData, Farm, IrrigationEvent
 
 
 @lru_cache(maxsize=1)
@@ -46,6 +46,49 @@ def load_fields() -> List[FieldData]:
     with open(DATA_DIR / "fields.json", "r", encoding="utf-8") as f:
         data = json.load(f)
     return [FieldData(**item) for item in data]
+
+
+@lru_cache(maxsize=1)
+def load_farms() -> List[Farm]:
+    """Load farm metadata from farms.json."""
+    with open(DATA_DIR / "farms.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+    return [Farm(**item) for item in data]
+
+
+@lru_cache(maxsize=1)
+def load_irrigation_events() -> List[IrrigationEvent]:
+    """Load irrigation events from irrigation_events.json."""
+    with open(DATA_DIR / "irrigation_events.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+    return [IrrigationEvent(**item) for item in data]
+
+
+@lru_cache(maxsize=1)
+def load_weather() -> Dict[str, Any]:
+    """Load weather data from weather.json (keyed by farm_id)."""
+    with open(DATA_DIR / "weather.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+    return data
+
+
+def get_irrigation_events_for_farm(
+    farm_id: str, days: int = None
+) -> List[IrrigationEvent]:
+    """Get irrigation events for a farm, optionally limited to the last N days."""
+    from datetime import datetime, timedelta, timezone
+    events = load_irrigation_events()
+    farm_events = [e for e in events if e.farm_id == farm_id]
+    if days is not None:
+        cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+        farm_events = [e for e in farm_events if e.start_time >= cutoff]
+    return sorted(farm_events, key=lambda e: e.start_time)
+
+
+def get_weather_for_farm(farm_id: str) -> Dict[str, Any]:
+    """Return the weather block for one farm, or empty dict if not found."""
+    weather = load_weather()
+    return weather.get(farm_id, {})
 
 
 def get_fields_for_farm(farm_id: str = None) -> List[FieldData]:
@@ -134,3 +177,7 @@ def clear_caches():
     load_readings.cache_clear()
     load_ndvi_snapshots.cache_clear()
     load_rules.cache_clear()
+    load_fields.cache_clear()
+    load_farms.cache_clear()
+    load_irrigation_events.cache_clear()
+    load_weather.cache_clear()

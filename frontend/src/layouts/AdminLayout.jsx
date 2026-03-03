@@ -18,7 +18,7 @@ export default function AdminLayout() {
   return (
     <div className="flex gap-6 -m-6">
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-800/50 border-r border-slate-700 min-h-[calc(100vh-80px)] p-4">
+      <aside className="w-64 bg-slate-800/50 border-r border-slate-700 min-h-[calc(100vh-5rem)] p-4">
         <div className="mb-6">
           <h2 className="text-lg font-semibold text-white flex items-center gap-2">
             <span className="text-2xl">🛡️</span>

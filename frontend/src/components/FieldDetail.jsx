@@ -11,10 +11,13 @@ import {
   Tooltip,
   ResponsiveContainer,
   ReferenceLine,
+  ReferenceArea,
 } from 'recharts';
 import { getFieldDetail } from '../api/client';
 import { getStatusColors, chartTooltipStyle, chartGridStroke, colors } from '../styles/tokens';
 import { LoadingSpinner, ErrorBanner, Card, MetricCard, MetricCardSkeleton, TimeRangeToggle } from './shared';
+import RecommendationExplainer from './RecommendationExplainer';
+import FieldWeatherCard from './FieldWeatherCard';
 
 // Format timestamp for chart display
 function formatTimestamp(timestamp) {
@@ -120,6 +123,8 @@ export default function FieldDetail() {
   }
 
   const { field, soil_moisture_timeseries, temperature_timeseries } = data;
+  const triggers = data.triggers || [];
+  const inlineWeather = data.weather || null;
   const fieldColors = getStatusColors(field.status);
 
   // Get status for soil moisture
@@ -214,6 +219,12 @@ export default function FieldDetail() {
         />
       </div>
 
+      {/* Recommendation Explainer & Inline Weather */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+        <RecommendationExplainer recommendation={field.recommendation} triggers={triggers} />
+        <FieldWeatherCard weather={inlineWeather} />
+      </div>
+
       {/* Time Range Toggle */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-white">Sensor Data</h3>
@@ -242,6 +253,10 @@ export default function FieldDetail() {
                   tickLine={false}
                 />
                 <Tooltip contentStyle={chartTooltipStyle} />
+                {/* Threshold bands */}
+                <ReferenceArea y1={0} y2={18} fill={colors.status.critical.hex} fillOpacity={0.08} />
+                <ReferenceArea y1={18} y2={25} fill={colors.status.warning.hex} fillOpacity={0.08} />
+                <ReferenceArea y1={25} y2={50} fill={colors.status.ok.hex} fillOpacity={0.06} />
                 <ReferenceLine y={18} stroke={colors.status.critical.hex} strokeDasharray="5 5" label={{ value: 'Critical', fill: colors.status.critical.hex, fontSize: 10 }} />
                 <ReferenceLine y={25} stroke={colors.status.ok.hex} strokeDasharray="5 5" label={{ value: 'OK', fill: colors.status.ok.hex, fontSize: 10 }} />
                 <Line 
@@ -277,6 +292,12 @@ export default function FieldDetail() {
                   tickLine={false}
                 />
                 <Tooltip contentStyle={chartTooltipStyle} />
+                {/* Temperature threshold bands */}
+                <ReferenceArea y1={10} y2={10} fill={colors.status.critical.hex} fillOpacity={0.08} />
+                <ReferenceArea y1={35} y2={40} fill={colors.status.critical.hex} fillOpacity={0.08} />
+                <ReferenceArea y1={10} y2={35} fill={colors.status.ok.hex} fillOpacity={0.06} />
+                <ReferenceLine y={10} stroke={colors.status.info.hex} strokeDasharray="5 5" label={{ value: 'Cold', fill: colors.status.info.hex, fontSize: 10 }} />
+                <ReferenceLine y={35} stroke={colors.status.critical.hex} strokeDasharray="5 5" label={{ value: 'Heat', fill: colors.status.critical.hex, fontSize: 10 }} />
                 <Line 
                   type="monotone" 
                   dataKey="value" 
@@ -309,6 +330,8 @@ export default function FieldDetail() {
                   tickLine={false}
                 />
                 <Tooltip contentStyle={chartTooltipStyle} />
+                {/* NDVI stress band */}
+                <ReferenceArea y1={0} y2={0.35} fill={colors.status.critical.hex} fillOpacity={0.08} />
                 <ReferenceLine y={0.35} stroke={colors.status.critical.hex} strokeDasharray="5 5" label={{ value: 'Stress', fill: colors.status.critical.hex, fontSize: 10 }} />
                 <Bar 
                   dataKey="ndvi" 

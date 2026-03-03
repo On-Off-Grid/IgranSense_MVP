@@ -1,0 +1,902 @@
+[
+  {
+    "event_id": "irr_0055",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-01-30T06:26:00Z",
+    "end_time": "2026-01-30T08:33:00Z",
+    "volume_liters": 746,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0025",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "start_time": "2026-01-30T07:06:00Z",
+    "end_time": "2026-01-30T08:00:00Z",
+    "volume_liters": 1141,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0001",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-01-30T17:15:00Z",
+    "end_time": "2026-01-30T18:42:00Z",
+    "volume_liters": 942,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0078",
+    "field_id": "field_9",
+    "farm_id": "farm_3",
+    "start_time": "2026-01-30T17:54:00Z",
+    "end_time": "2026-01-30T18:54:00Z",
+    "volume_liters": 3630,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0047",
+    "field_id": "field_6",
+    "farm_id": "farm_2",
+    "start_time": "2026-01-30T18:10:00Z",
+    "end_time": "2026-01-30T19:07:00Z",
+    "volume_liters": 1391,
+    "method": "sprinkler",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0014",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "start_time": "2026-01-30T18:38:00Z",
+    "end_time": "2026-01-30T19:24:00Z",
+    "volume_liters": 1294,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0067",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "start_time": "2026-01-30T20:03:00Z",
+    "end_time": "2026-01-30T21:25:00Z",
+    "volume_liters": 776,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0085",
+    "field_id": "field_10",
+    "farm_id": "farm_3",
+    "start_time": "2026-01-30T20:35:00Z",
+    "end_time": "2026-01-30T22:06:00Z",
+    "volume_liters": 3214,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0041",
+    "field_id": "field_5",
+    "farm_id": "farm_2",
+    "start_time": "2026-01-30T20:57:00Z",
+    "end_time": "2026-01-30T21:40:00Z",
+    "volume_liters": 1589,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0035",
+    "field_id": "field_4",
+    "farm_id": "farm_2",
+    "start_time": "2026-01-30T20:59:00Z",
+    "end_time": "2026-01-30T22:35:00Z",
+    "volume_liters": 1918,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0056",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-01T06:19:00Z",
+    "end_time": "2026-02-01T08:02:00Z",
+    "volume_liters": 507,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0002",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-01T07:05:00Z",
+    "end_time": "2026-02-01T08:30:00Z",
+    "volume_liters": 1038,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0068",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-01T07:22:00Z",
+    "end_time": "2026-02-01T09:08:00Z",
+    "volume_liters": 735,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0015",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-02T06:43:00Z",
+    "end_time": "2026-02-02T09:30:00Z",
+    "volume_liters": 1173,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0026",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-02T07:03:00Z",
+    "end_time": "2026-02-02T09:16:00Z",
+    "volume_liters": 1047,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0003",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-03T05:28:00Z",
+    "end_time": "2026-02-03T08:28:00Z",
+    "volume_liters": 1084,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0048",
+    "field_id": "field_6",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-03T18:22:00Z",
+    "end_time": "2026-02-03T20:10:00Z",
+    "volume_liters": 1840,
+    "method": "sprinkler",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0079",
+    "field_id": "field_9",
+    "farm_id": "farm_3",
+    "start_time": "2026-02-03T20:04:00Z",
+    "end_time": "2026-02-03T22:43:00Z",
+    "volume_liters": 3326,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0069",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-04T05:17:00Z",
+    "end_time": "2026-02-04T07:38:00Z",
+    "volume_liters": 598,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0027",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-04T05:34:00Z",
+    "end_time": "2026-02-04T07:58:00Z",
+    "volume_liters": 843,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0057",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-04T20:43:00Z",
+    "end_time": "2026-02-04T22:07:00Z",
+    "volume_liters": 661,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0086",
+    "field_id": "field_10",
+    "farm_id": "farm_3",
+    "start_time": "2026-02-05T07:05:00Z",
+    "end_time": "2026-02-05T08:50:00Z",
+    "volume_liters": 2253,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0042",
+    "field_id": "field_5",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-05T17:49:00Z",
+    "end_time": "2026-02-05T18:52:00Z",
+    "volume_liters": 2704,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0036",
+    "field_id": "field_4",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-05T19:08:00Z",
+    "end_time": "2026-02-05T20:54:00Z",
+    "volume_liters": 2436,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0016",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-05T19:10:00Z",
+    "end_time": "2026-02-05T21:36:00Z",
+    "volume_liters": 903,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0004",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-05T20:17:00Z",
+    "end_time": "2026-02-05T21:26:00Z",
+    "volume_liters": 1020,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0049",
+    "field_id": "field_6",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-06T05:25:00Z",
+    "end_time": "2026-02-06T07:19:00Z",
+    "volume_liters": 1285,
+    "method": "sprinkler",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0058",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-06T19:05:00Z",
+    "end_time": "2026-02-06T20:35:00Z",
+    "volume_liters": 744,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0028",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-07T07:28:00Z",
+    "end_time": "2026-02-07T10:18:00Z",
+    "volume_liters": 800,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0070",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-07T18:58:00Z",
+    "end_time": "2026-02-07T20:00:00Z",
+    "volume_liters": 668,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0059",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-08T05:15:00Z",
+    "end_time": "2026-02-08T07:46:00Z",
+    "volume_liters": 712,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0005",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-08T17:06:00Z",
+    "end_time": "2026-02-08T19:07:00Z",
+    "volume_liters": 1152,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0080",
+    "field_id": "field_9",
+    "farm_id": "farm_3",
+    "start_time": "2026-02-08T17:23:00Z",
+    "end_time": "2026-02-08T19:50:00Z",
+    "volume_liters": 3448,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0017",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-08T17:53:00Z",
+    "end_time": "2026-02-08T20:32:00Z",
+    "volume_liters": 1523,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0087",
+    "field_id": "field_10",
+    "farm_id": "farm_3",
+    "start_time": "2026-02-09T19:35:00Z",
+    "end_time": "2026-02-09T22:20:00Z",
+    "volume_liters": 2504,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0037",
+    "field_id": "field_4",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-10T04:04:00Z",
+    "end_time": "2026-02-10T06:51:00Z",
+    "volume_liters": 1936,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0043",
+    "field_id": "field_5",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-10T07:07:00Z",
+    "end_time": "2026-02-10T07:56:00Z",
+    "volume_liters": 1705,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0060",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-10T07:45:00Z",
+    "end_time": "2026-02-10T09:53:00Z",
+    "volume_liters": 653,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0006",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-10T17:05:00Z",
+    "end_time": "2026-02-10T19:56:00Z",
+    "volume_liters": 1100,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0071",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-10T17:08:00Z",
+    "end_time": "2026-02-10T19:36:00Z",
+    "volume_liters": 443,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0050",
+    "field_id": "field_6",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-10T20:01:00Z",
+    "end_time": "2026-02-10T21:00:00Z",
+    "volume_liters": 1898,
+    "method": "sprinkler",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0029",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-11T04:10:00Z",
+    "end_time": "2026-02-11T06:24:00Z",
+    "volume_liters": 1197,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0018",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-11T17:31:00Z",
+    "end_time": "2026-02-11T18:05:00Z",
+    "volume_liters": 1014,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0061",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-12T17:14:00Z",
+    "end_time": "2026-02-12T18:29:00Z",
+    "volume_liters": 811,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0081",
+    "field_id": "field_9",
+    "farm_id": "farm_3",
+    "start_time": "2026-02-12T20:27:00Z",
+    "end_time": "2026-02-12T22:05:00Z",
+    "volume_liters": 2660,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0007",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-13T05:42:00Z",
+    "end_time": "2026-02-13T07:10:00Z",
+    "volume_liters": 1096,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0051",
+    "field_id": "field_6",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-13T06:38:00Z",
+    "end_time": "2026-02-13T08:59:00Z",
+    "volume_liters": 1353,
+    "method": "sprinkler",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0072",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-13T18:20:00Z",
+    "end_time": "2026-02-13T20:16:00Z",
+    "volume_liters": 739,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0019",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-14T05:56:00Z",
+    "end_time": "2026-02-14T08:51:00Z",
+    "volume_liters": 980,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0030",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-14T18:00:00Z",
+    "end_time": "2026-02-14T20:09:00Z",
+    "volume_liters": 971,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0062",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-15T04:29:00Z",
+    "end_time": "2026-02-15T05:33:00Z",
+    "volume_liters": 810,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0038",
+    "field_id": "field_4",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-15T06:23:00Z",
+    "end_time": "2026-02-15T08:05:00Z",
+    "volume_liters": 1823,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0088",
+    "field_id": "field_10",
+    "farm_id": "farm_3",
+    "start_time": "2026-02-15T19:17:00Z",
+    "end_time": "2026-02-15T21:05:00Z",
+    "volume_liters": 2314,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0008",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-15T20:29:00Z",
+    "end_time": "2026-02-15T22:32:00Z",
+    "volume_liters": 966,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0044",
+    "field_id": "field_5",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-16T05:02:00Z",
+    "end_time": "2026-02-16T06:50:00Z",
+    "volume_liters": 2146,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0082",
+    "field_id": "field_9",
+    "farm_id": "farm_3",
+    "start_time": "2026-02-16T06:48:00Z",
+    "end_time": "2026-02-16T09:16:00Z",
+    "volume_liters": 3167,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0073",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-16T07:30:00Z",
+    "end_time": "2026-02-16T08:04:00Z",
+    "volume_liters": 733,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0020",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-17T04:42:00Z",
+    "end_time": "2026-02-17T07:13:00Z",
+    "volume_liters": 1462,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0009",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-17T06:34:00Z",
+    "end_time": "2026-02-17T08:06:00Z",
+    "volume_liters": 967,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0052",
+    "field_id": "field_6",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-17T17:57:00Z",
+    "end_time": "2026-02-17T20:54:00Z",
+    "volume_liters": 1194,
+    "method": "sprinkler",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0031",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-17T20:09:00Z",
+    "end_time": "2026-02-17T21:27:00Z",
+    "volume_liters": 1003,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0063",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-18T20:57:00Z",
+    "end_time": "2026-02-18T22:07:00Z",
+    "volume_liters": 780,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0032",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-19T04:03:00Z",
+    "end_time": "2026-02-19T07:02:00Z",
+    "volume_liters": 1188,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0074",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-19T05:48:00Z",
+    "end_time": "2026-02-19T06:25:00Z",
+    "volume_liters": 476,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0010",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-20T05:14:00Z",
+    "end_time": "2026-02-20T05:52:00Z",
+    "volume_liters": 1123,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0021",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-20T18:25:00Z",
+    "end_time": "2026-02-20T20:30:00Z",
+    "volume_liters": 1348,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0075",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-21T05:30:00Z",
+    "end_time": "2026-02-21T06:29:00Z",
+    "volume_liters": 638,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0089",
+    "field_id": "field_10",
+    "farm_id": "farm_3",
+    "start_time": "2026-02-21T05:47:00Z",
+    "end_time": "2026-02-21T08:34:00Z",
+    "volume_liters": 3360,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0045",
+    "field_id": "field_5",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-21T06:42:00Z",
+    "end_time": "2026-02-21T07:38:00Z",
+    "volume_liters": 2124,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0083",
+    "field_id": "field_9",
+    "farm_id": "farm_3",
+    "start_time": "2026-02-21T17:54:00Z",
+    "end_time": "2026-02-21T19:47:00Z",
+    "volume_liters": 2372,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0053",
+    "field_id": "field_6",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-21T18:27:00Z",
+    "end_time": "2026-02-21T19:14:00Z",
+    "volume_liters": 1971,
+    "method": "sprinkler",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0064",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-21T18:49:00Z",
+    "end_time": "2026-02-21T21:32:00Z",
+    "volume_liters": 648,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0011",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-22T05:41:00Z",
+    "end_time": "2026-02-22T08:18:00Z",
+    "volume_liters": 1205,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0039",
+    "field_id": "field_4",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-22T17:59:00Z",
+    "end_time": "2026-02-22T18:55:00Z",
+    "volume_liters": 1775,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0022",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-23T04:04:00Z",
+    "end_time": "2026-02-23T06:00:00Z",
+    "volume_liters": 921,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0033",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-23T05:54:00Z",
+    "end_time": "2026-02-23T07:11:00Z",
+    "volume_liters": 770,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0076",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-24T06:38:00Z",
+    "end_time": "2026-02-24T07:37:00Z",
+    "volume_liters": 748,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0065",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-24T17:15:00Z",
+    "end_time": "2026-02-24T18:54:00Z",
+    "volume_liters": 571,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0012",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-25T05:15:00Z",
+    "end_time": "2026-02-25T08:08:00Z",
+    "volume_liters": 1351,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0023",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-25T05:45:00Z",
+    "end_time": "2026-02-25T06:30:00Z",
+    "volume_liters": 1134,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0054",
+    "field_id": "field_6",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-25T17:32:00Z",
+    "end_time": "2026-02-25T19:21:00Z",
+    "volume_liters": 1682,
+    "method": "sprinkler",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0090",
+    "field_id": "field_10",
+    "farm_id": "farm_3",
+    "start_time": "2026-02-25T20:46:00Z",
+    "end_time": "2026-02-25T23:46:00Z",
+    "volume_liters": 3356,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0066",
+    "field_id": "field_7",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-26T05:24:00Z",
+    "end_time": "2026-02-26T06:33:00Z",
+    "volume_liters": 761,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0084",
+    "field_id": "field_9",
+    "farm_id": "farm_3",
+    "start_time": "2026-02-26T19:56:00Z",
+    "end_time": "2026-02-26T21:36:00Z",
+    "volume_liters": 3138,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0046",
+    "field_id": "field_5",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-27T05:51:00Z",
+    "end_time": "2026-02-27T07:06:00Z",
+    "volume_liters": 2244,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0034",
+    "field_id": "field_3",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-27T05:56:00Z",
+    "end_time": "2026-02-27T08:51:00Z",
+    "volume_liters": 952,
+    "method": "drip",
+    "source": "auto"
+  },
+  {
+    "event_id": "irr_0024",
+    "field_id": "field_2",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-27T06:17:00Z",
+    "end_time": "2026-02-27T08:51:00Z",
+    "volume_liters": 1119,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0077",
+    "field_id": "field_8",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-27T17:36:00Z",
+    "end_time": "2026-02-27T19:42:00Z",
+    "volume_liters": 553,
+    "method": "drip",
+    "source": "manual"
+  },
+  {
+    "event_id": "irr_0040",
+    "field_id": "field_4",
+    "farm_id": "farm_2",
+    "start_time": "2026-02-27T19:38:00Z",
+    "end_time": "2026-02-27T21:01:00Z",
+    "volume_liters": 2969,
+    "method": "drip",
+    "source": "scheduled"
+  },
+  {
+    "event_id": "irr_0013",
+    "field_id": "field_1",
+    "farm_id": "farm_1",
+    "start_time": "2026-02-28T07:08:00Z",
+    "end_time": "2026-02-28T09:48:00Z",
+    "volume_liters": 1305,
+    "method": "drip",
+    "source": "scheduled"
+  }
+]

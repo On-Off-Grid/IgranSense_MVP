@@ -15,6 +15,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 from .config import API_TITLE, API_VERSION, API_DESCRIPTION
 from .models import (
+    Farm,
     FieldSummary,
     FieldWithGeometry,
     FieldDetailResponse,
@@ -29,9 +30,12 @@ from .models import (
     SensorExtended,
     SensorDetail,
     SensorReading,
+    WaterDashboardResponse,
+    WeatherDashboardResponse,
 )
 from .services.data_loader import (
     get_field_ids,
+    get_fields_for_farm,
     get_latest_soil_moisture,
     get_latest_ndvi,
     get_readings_for_field,
@@ -39,15 +43,21 @@ from .services.data_loader import (
     load_rules,
     load_sensors,
     load_readings,
+    load_farms,
+    load_fields,
 )
 from .services.rule_engine import (
+    FIELD_NAMES,
     compute_all_field_summaries,
     compute_fields_with_geometry,
     compute_all_alerts,
     compute_field_status,
+    compute_rule_triggers,
     get_field_name,
 )
 from .services.system_health import compute_system_status
+from .services.water import compute_water_dashboard
+from .services.weather import get_farm_weather, get_compact_weather
 from .services.auth import (
     authenticate_user,
     create_access_token,
@@ -142,6 +152,82 @@ async def get_me(user: User = Depends(require_user)) -> User:
     return user
 
 
+# =============================================================================
+# Farms Endpoints
+# =============================================================================
+
+@app.get("/farms", response_model=List[Farm], tags=["Farms"])
+async def list_farms() -> List[Farm]:
+    """
+    Get list of all farms with metadata.
+
+    Returns farm_id, name, region, field_count, status, and coordinates.
+    """
+    return load_farms()
+
+
+# =============================================================================
+# Water / Irrigation Endpoints
+# =============================================================================
+
+@app.get("/water", response_model=WaterDashboardResponse, tags=["Water"])
+async def water_dashboard(
+    farm_id: str,
+    time_range: str = "7d",
+) -> WaterDashboardResponse:
+    """
+    Get irrigation & water dashboard for a farm.
+
+    Query params:
+    - farm_id (required): e.g. "farm_1"
+    - time_range: "today" | "7d" | "30d" | "season" (default "7d")
+
+    Returns KPIs, daily irrigation time-series, and moisture-zone distribution.
+    """
+    valid_ranges = {"today", "7d", "30d", "season"}
+    if time_range not in valid_ranges:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid time_range '{time_range}'. Must be one of {sorted(valid_ranges)}",
+        )
+    farms = load_farms()
+    if not any(f.farm_id == farm_id for f in farms):
+        raise HTTPException(status_code=404, detail=f"Farm '{farm_id}' not found")
+    return compute_water_dashboard(farm_id, time_range)
+
+
+# =============================================================================
+# Weather & Risk Endpoints
+# =============================================================================
+
+@app.get("/weather", response_model=WeatherDashboardResponse, tags=["Weather"])
+async def weather_dashboard(
+    farm_id: str,
+    compact: bool = False,
+) -> WeatherDashboardResponse:
+    """
+    Get weather & risk dashboard for a farm.
+
+    Query params:
+    - farm_id (required): e.g. "farm_1"
+    - compact (default false): if true, return only 3-day forecast for widgets
+
+    Returns current conditions, forecast, irrigation window, and historical rainfall.
+    """
+    farms = load_farms()
+    if not any(f.farm_id == farm_id for f in farms):
+        raise HTTPException(status_code=404, detail=f"Farm '{farm_id}' not found")
+
+    if compact:
+        result = get_compact_weather(farm_id)
+    else:
+        result = get_farm_weather(farm_id)
+
+    if result is None:
+        raise HTTPException(status_code=404, detail=f"No weather data for farm '{farm_id}'")
+    return result
+
+
 @app.get("/fields", response_model=List[FieldWithGeometry], tags=["Fields"])
 async def list_fields(farm_id: Optional[str] = None) -> List[FieldWithGeometry]:
     """
@@ -206,6 +292,18 @@ async def get_field_detail(field_id: str) -> FieldDetailResponse:
         for s in ndvi_snapshots
     ]
     
+    # v2.1: Compute rule triggers and compact inline weather
+    triggers = compute_rule_triggers(field_id)
+
+    # Resolve the farm_id for this field
+    all_fields = load_fields()
+    field_data = next((f for f in all_fields if f.field_id == field_id), None)
+    farm_id = field_data.farm_id if field_data else None
+    compact_weather = None
+    if farm_id:
+        cw = get_compact_weather(farm_id, days=3)
+        compact_weather = cw.current if cw else None
+
     return FieldDetailResponse(
         field=FieldDetail(
             id=field_id,
@@ -218,6 +316,8 @@ async def get_field_detail(field_id: str) -> FieldDetailResponse:
         soil_moisture_timeseries=soil_timeseries,
         temperature_timeseries=temp_timeseries,
         ndvi_timeseries=ndvi_timeseries,
+        triggers=triggers,
+        weather=compact_weather,
     )
 
 
@@ -313,15 +413,10 @@ async def get_system_status() -> SystemStatus:
 # Sensors Endpoints
 # =============================================================================
 
-FIELD_NAMES = {
-    "field_1": "North Block A",
-    "field_2": "South Block B", 
-    "field_3": "East Block C",
-}
-
-
 def _generate_sensor_extended(sensor) -> SensorExtended:
     """Convert basic sensor to extended with mock data."""
+    from .services.data_loader import get_readings_for_sensor
+
     # Mock data generation based on sensor status
     now = datetime.utcnow()
     
@@ -334,6 +429,10 @@ def _generate_sensor_extended(sensor) -> SensorExtended:
     else:  # offline
         last_seen = now - timedelta(hours=randint(2, 48))
         battery = None
+
+    # Last 12 readings for sparkline
+    readings = get_readings_for_sensor(sensor.sensor_id)[:12]
+    sparkline = [round(r.value, 2) for r in reversed(readings)] if readings else None
     
     return SensorExtended(
         sensor_id=sensor.sensor_id,
@@ -345,7 +444,8 @@ def _generate_sensor_extended(sensor) -> SensorExtended:
         last_seen_at=last_seen,
         battery_pct=round(battery, 1) if battery else None,
         firmware_version="1.2.3",
-        field_name=FIELD_NAMES.get(sensor.field_id, sensor.field_id),
+        field_name=get_field_name(sensor.field_id),
+        sparkline=sparkline,
     )
 
 

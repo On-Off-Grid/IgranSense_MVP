@@ -1,14 +1,15 @@
-import { createContext, useContext, useState, useMemo, useCallback } from 'react';
+import { createContext, useContext, useState, useMemo, useCallback, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 import { hasMultiFarmAccess } from '../utils/rolePermissions';
+import { getFarms } from '../api/client';
 
 const FarmContext = createContext(null);
 
 /**
- * Mock farms data for enterprise/admin users
- * In production, this would come from the backend
+ * Fallback farms data used when the API is unreachable (offline mode).
+ * Mirrors data/farms.json on the backend.
  */
-const MOCK_FARMS = [
+const FALLBACK_FARMS = [
   {
     id: 'farm_1',
     name: 'North Valley Farm',
@@ -41,6 +42,21 @@ const DEFAULT_FARM = {
 };
 
 /**
+ * Normalise a farm object from the API (farms.json shape) to the shape
+ * the frontend components expect.
+ */
+function normaliseFarm(apiFarm) {
+  return {
+    id: apiFarm.farm_id,
+    name: apiFarm.name,
+    location: apiFarm.region,
+    fieldCount: apiFarm.field_count,
+    status: apiFarm.status,
+    coordinates: apiFarm.coordinates,
+  };
+}
+
+/**
  * FarmProvider - Context for multi-farm selection
  * 
  * Provides:
@@ -51,12 +67,28 @@ const DEFAULT_FARM = {
  */
 export function FarmProvider({ children }) {
   const { user } = useAuth();
-  
-  // Derive farms list based on user
+  const [apiFarms, setApiFarms] = useState(null); // null = not yet loaded
+
+  // Fetch farms from the API once on mount
+  useEffect(() => {
+    let cancelled = false;
+    getFarms()
+      .then((data) => {
+        if (!cancelled) setApiFarms(data.map(normaliseFarm));
+      })
+      .catch(() => {
+        // Offline or API unavailable — use fallback
+        if (!cancelled) setApiFarms(FALLBACK_FARMS);
+      });
+    return () => { cancelled = true; };
+  }, []);
+
+  // Derive farms list based on user role + loaded API data
   const farms = useMemo(() => {
     if (!user) return [];
-    return hasMultiFarmAccess(user.role) ? MOCK_FARMS : [DEFAULT_FARM];
-  }, [user]);
+    if (!hasMultiFarmAccess(user.role)) return [DEFAULT_FARM];
+    return apiFarms ?? FALLBACK_FARMS; // use fallback while loading
+  }, [user, apiFarms]);
 
   // Track selected farm with useState, initialized based on user
   const [selectedFarmId, setSelectedFarmId] = useState(() => {

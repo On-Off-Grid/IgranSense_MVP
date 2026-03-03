@@ -58,3 +58,7 @@ ehthumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+
+# AI / internal prompts (keep out of public repos)
+prompt.md
+*.prompt.md

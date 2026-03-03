@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getSensors } from '../api/client';
 import { getStatusColors, SURFACE } from '../styles/tokens';
@@ -7,6 +7,7 @@ import LoadingSpinner from './shared/LoadingSpinner';
 import ErrorBanner from './shared/ErrorBanner';
 import StatusBadge from './shared/StatusBadge';
 import SensorDetailPanel from './SensorDetailPanel';
+import SensorSparkline from './SensorSparkline';
 import { useFarm } from '../context/FarmContext';
 
 /**
@@ -35,6 +36,7 @@ export default function SensorRegistry() {
   const [fieldFilter, setFieldFilter] = useState(searchParams.get('field') || 'all');
   const [typeFilter, setTypeFilter] = useState(searchParams.get('type') || 'all');
   const [search, setSearch] = useState(searchParams.get('search') || '');
+  const [sortBy, setSortBy] = useState('name');
 
   // Detail panel state
   const [selectedSensorId, setSelectedSensorId] = useState(null);
@@ -82,6 +84,25 @@ export default function SensorRegistry() {
       s.type.toLowerCase().includes(q)
     );
   });
+
+  // Sort
+  const STATUS_ORDER = { online: 0, battery_low: 1, offline: 2 };
+  const sortedSensors = useMemo(() => {
+    const sorted = [...filteredSensors];
+    sorted.sort((a, b) => {
+      switch (sortBy) {
+        case 'battery':
+          return (b.battery_pct ?? -1) - (a.battery_pct ?? -1);
+        case 'last_seen':
+          return new Date(b.last_seen_at || 0) - new Date(a.last_seen_at || 0);
+        case 'status':
+          return (STATUS_ORDER[a.status] ?? 9) - (STATUS_ORDER[b.status] ?? 9);
+        default: // 'name'
+          return a.sensor_id.localeCompare(b.sensor_id);
+      }
+    });
+    return sorted;
+  }, [filteredSensors, sortBy]);
 
   // Extract unique values for filter dropdowns
   const uniqueFields = [...new Set(sensors.map((s) => s.field_id))];
@@ -193,6 +214,19 @@ export default function SensorRegistry() {
               ))}
             </select>
 
+            {/* Sort Dropdown */}
+            <select
+              data-testid="sort-dropdown"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className={`${SURFACE.card} border border-slate-700 text-white rounded-lg px-3 py-2 text-sm`}
+            >
+              <option value="name">Sort: Name</option>
+              <option value="battery">Sort: Battery</option>
+              <option value="last_seen">Sort: Last Seen</option>
+              <option value="status">Sort: Status</option>
+            </select>
+
             {/* Type Dropdown */}
             <select
               value={typeFilter}
@@ -213,13 +247,13 @@ export default function SensorRegistry() {
             <LoadingSpinner />
           ) : error ? (
             <ErrorBanner message={error} />
-          ) : filteredSensors.length === 0 ? (
+          ) : sortedSensors.length === 0 ? (
             <Card className="text-center py-12">
               <p className="text-slate-400">No sensors found matching your filters.</p>
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredSensors.map((sensor) => (
+              {sortedSensors.map((sensor) => (
                 <SensorCard
                   key={sensor.sensor_id}
                   sensor={sensor}
@@ -306,6 +340,13 @@ function SensorCard({ sensor, isSelected, onClick }) {
           </div>
         )}
       </div>
+
+      {/* Sparkline */}
+      {sensor.sparkline && sensor.sparkline.length > 1 && (
+        <div className="mt-3 pt-3 border-t border-slate-700">
+          <SensorSparkline data={sensor.sparkline} type={sensor.type} />
+        </div>
+      )}
     </Card>
   );
 }

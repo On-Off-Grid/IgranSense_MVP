@@ -1,18 +1,24 @@
 import { useState, useEffect, useMemo } from 'react';
 import { getAlerts, acknowledgeAlert, snoozeAlert, dismissAlert } from '../api/client';
 import { cardClasses } from '../styles/tokens';
-import { LoadingSpinner, ErrorBanner } from './shared';
+import { LoadingSpinner, ErrorBanner, TimeRangeToggle } from './shared';
 import AlertFilters from './AlertFilters';
 import AlertGroup from './AlertGroup';
 import AlertCard from './AlertCard';
+import AggregatedAlertCard from './AggregatedAlertCard';
 import { useAuth } from '../context/AuthContext';
 import { useFarm } from '../context/FarmContext';
+
+const TIME_RANGE_OPTIONS = [1, 7, 30];
+const TIME_RANGE_LABELS = { 1: '24h', 7: '7d', 30: '30d' };
 
 export default function AlertsList() {
   const [alerts, setAlerts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState({ search: '', severity: 'all', fieldId: 'all' });
+  const [timeRange, setTimeRange] = useState(30);
+  const [groupSimilar, setGroupSimilar] = useState(false);
   const { isAuthenticated } = useAuth();
   const { selectedFarm } = useFarm();
 
@@ -35,9 +41,15 @@ export default function AlertsList() {
     return [...new Set(alerts.map(a => a.field_id))].sort();
   }, [alerts]);
 
-  // Filter alerts based on current filters
+  // Filter alerts based on current filters + time range
   const filteredAlerts = useMemo(() => {
+    const now = new Date();
+    const cutoff = new Date(now.getTime() - timeRange * 24 * 60 * 60 * 1000);
+
     return alerts.filter(alert => {
+      // Time-range filter
+      if (alert.timestamp && new Date(alert.timestamp) < cutoff) return false;
+
       // Search filter
       if (filters.search) {
         const searchLower = filters.search.toLowerCase();
@@ -60,7 +72,7 @@ export default function AlertsList() {
       
       return true;
     });
-  }, [alerts, filters]);
+  }, [alerts, filters, timeRange]);
 
   // Group alerts by severity
   const groupedAlerts = useMemo(() => {
@@ -72,6 +84,29 @@ export default function AlertsList() {
     });
     return groups;
   }, [filteredAlerts]);
+
+  // Aggregate similar alerts: collapse by (type, severity)
+  const aggregatedGroups = useMemo(() => {
+    if (!groupSimilar) return null;
+
+    const buildAggregated = (alertList) => {
+      const buckets = {};
+      alertList.forEach(alert => {
+        const key = `${alert.type}::${alert.severity}`;
+        if (!buckets[key]) {
+          buckets[key] = { type: alert.type, severity: alert.severity, alerts: [] };
+        }
+        buckets[key].alerts.push(alert);
+      });
+      return Object.values(buckets);
+    };
+
+    return {
+      critical: buildAggregated(groupedAlerts.critical),
+      warning: buildAggregated(groupedAlerts.warning),
+      info: buildAggregated(groupedAlerts.info),
+    };
+  }, [groupSimilar, groupedAlerts]);
 
   // Alert action handlers
   const handleAcknowledge = async (alert) => {
@@ -119,12 +154,32 @@ export default function AlertsList() {
   }
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
+    <div data-testid="alerts-list">
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <h2 className="text-2xl font-bold text-white">Alerts & Recommendations</h2>
-        <span className="text-sm text-slate-400">
-          {filteredAlerts.length} alert{filteredAlerts.length !== 1 ? 's' : ''}
-        </span>
+        <div className="flex items-center gap-3">
+          {/* Time-range toggle */}
+          <TimeRangeToggle
+            value={timeRange}
+            onChange={setTimeRange}
+            options={TIME_RANGE_OPTIONS}
+          />
+          {/* Aggregation toggle */}
+          <button
+            data-testid="aggregate-toggle"
+            onClick={() => setGroupSimilar(g => !g)}
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${
+              groupSimilar
+                ? 'bg-blue-600 text-white border-blue-500'
+                : 'bg-slate-800 text-slate-400 border-slate-700 hover:bg-slate-700'
+            }`}
+          >
+            {groupSimilar ? 'Ungrouped' : 'Group similar'}
+          </button>
+          <span className="text-sm text-slate-400">
+            {filteredAlerts.length} alert{filteredAlerts.length !== 1 ? 's' : ''}
+          </span>
+        </div>
       </div>
 
       {/* Filters */}
@@ -145,56 +200,41 @@ export default function AlertsList() {
         </div>
       ) : (
         <div>
-          {/* Critical Alerts - expanded by default */}
-          <AlertGroup 
-            severity="critical" 
-            count={groupedAlerts.critical.length}
-            defaultExpanded={true}
-          >
-            {groupedAlerts.critical.map((alert, index) => (
-              <AlertCard
-                key={`${alert.field_id}-${alert.type}-${index}`}
-                alert={alert}
-                onAcknowledge={isAuthenticated ? handleAcknowledge : null}
-                onSnooze={isAuthenticated ? handleSnooze : null}
-                onDismiss={isAuthenticated ? handleDismiss : null}
-              />
-            ))}
-          </AlertGroup>
-
-          {/* Warning Alerts */}
-          <AlertGroup 
-            severity="warning" 
-            count={groupedAlerts.warning.length}
-            defaultExpanded={groupedAlerts.critical.length === 0}
-          >
-            {groupedAlerts.warning.map((alert, index) => (
-              <AlertCard
-                key={`${alert.field_id}-${alert.type}-${index}`}
-                alert={alert}
-                onAcknowledge={isAuthenticated ? handleAcknowledge : null}
-                onSnooze={isAuthenticated ? handleSnooze : null}
-                onDismiss={isAuthenticated ? handleDismiss : null}
-              />
-            ))}
-          </AlertGroup>
-
-          {/* Info Alerts */}
-          <AlertGroup 
-            severity="info" 
-            count={groupedAlerts.info.length}
-            defaultExpanded={groupedAlerts.critical.length === 0 && groupedAlerts.warning.length === 0}
-          >
-            {groupedAlerts.info.map((alert, index) => (
-              <AlertCard
-                key={`${alert.field_id}-${alert.type}-${index}`}
-                alert={alert}
-                onAcknowledge={isAuthenticated ? handleAcknowledge : null}
-                onSnooze={isAuthenticated ? handleSnooze : null}
-                onDismiss={isAuthenticated ? handleDismiss : null}
-              />
-            ))}
-          </AlertGroup>
+          {['critical', 'warning', 'info'].map((sev, idx) => (
+            <AlertGroup
+              key={sev}
+              severity={sev}
+              count={groupedAlerts[sev].length}
+              defaultExpanded={
+                idx === 0
+                  ? true
+                  : sev === 'warning'
+                    ? groupedAlerts.critical.length === 0
+                    : groupedAlerts.critical.length === 0 && groupedAlerts.warning.length === 0
+              }
+            >
+              {groupSimilar && aggregatedGroups
+                ? aggregatedGroups[sev].map(bucket => (
+                    <AggregatedAlertCard
+                      key={`${bucket.type}-${bucket.severity}`}
+                      bucket={bucket}
+                      onAcknowledge={isAuthenticated ? handleAcknowledge : null}
+                      onSnooze={isAuthenticated ? handleSnooze : null}
+                      onDismiss={isAuthenticated ? handleDismiss : null}
+                    />
+                  ))
+                : groupedAlerts[sev].map((alert, index) => (
+                    <AlertCard
+                      key={`${alert.field_id}-${alert.type}-${index}`}
+                      alert={alert}
+                      onAcknowledge={isAuthenticated ? handleAcknowledge : null}
+                      onSnooze={isAuthenticated ? handleSnooze : null}
+                      onDismiss={isAuthenticated ? handleDismiss : null}
+                    />
+                  ))
+              }
+            </AlertGroup>
+          ))}
         </div>
       )}
     </div>

@@ -50,6 +50,8 @@ Opens at **http://localhost:5173**
 | `npm run build` | Build for production |
 | `npm run preview` | Preview production build |
 | `npm run lint` | Run ESLint |
+| `npm test` | Run vitest test suite |
+| `npx vitest --ui` | Open vitest browser UI |
 
 ## Project Structure
 
@@ -71,21 +73,28 @@ frontend/
     │   ├── FarmOverview.jsx       # Main dashboard view
     │   ├── FieldCard.jsx          # Field summary card
     │   ├── ExpandableFieldCard.jsx# Expandable field with schematic
-    │   ├── FieldDetail.jsx        # Field detail charts
+    │   ├── FieldDetail.jsx        # Field detail charts + threshold bands (v2.1)
     │   ├── FieldSchematic.jsx     # Sensor grid visualization
-    │   ├── AlertsList.jsx         # Alerts list view
+    │   ├── AlertsList.jsx         # Alerts with time-range & aggregation (v2.1)
     │   ├── AlertCard.jsx          # Single alert display
     │   ├── AlertGroup.jsx         # Grouped alerts by field
     │   ├── AlertFilters.jsx       # Alert filtering controls
-    │   ├── SensorRegistry.jsx     # Sensor inventory table
+    │   ├── AggregatedAlertCard.jsx# Expandable aggregated alert card (v2.1)
+    │   ├── SensorRegistry.jsx     # Sensor inventory with sort dropdown (v2.1)
     │   ├── SensorDetailPanel.jsx  # Sensor details modal
     │   ├── SensorHealthBar.jsx    # Sensor status indicator
     │   ├── SensorIcon.jsx         # Sensor type icons
-    │   ├── SystemStatus.jsx       # System health dashboard
+    │   ├── SensorSparkline.jsx    # Tiny sparkline for sensor readings (v2.1)
+    │   ├── SystemStatus.jsx       # System health + MDC metrics strip (v2.1)
     │   ├── MDCStatusCard.jsx      # Edge gateway status
+    │   ├── IrrigationWater.jsx    # Irrigation & Water page (v2.1)
+    │   ├── WeatherRisk.jsx        # Weather & Risk page (v2.1)
+    │   ├── RecommendationExplainer.jsx # Rule trigger explainer (v2.1)
+    │   ├── FieldWeatherCard.jsx   # Inline weather widget (v2.1)
+    │   ├── CrossFarmSummary.jsx   # Enterprise cross-farm KPIs (v2.1)
     │   ├── auth/
     │   │   ├── index.js           # Auth component exports
-    │   │   └── PrivateRoute.jsx   # Route protection HOC
+    │   │   └── PrivateRoute.jsx   # Route protection + role guard (v2.1)
     │   └── shared/
     │       ├── index.js           # Shared component exports
     │       ├── Card.jsx           # Reusable card wrapper
@@ -97,7 +106,8 @@ frontend/
     │       ├── MetricCardSkeleton.jsx # Loading skeleton
     │       ├── StatusBadge.jsx    # Status label component
     │       ├── StatusFilter.jsx   # Status filter dropdown
-    │       └── TimeRangeToggle.jsx# Time range selector
+    │       ├── TimeRangeToggle.jsx# Time range selector
+    │       └── WeatherIcon.jsx    # Weather condition icon (v2.1)
     ├── context/
     │   ├── AuthContext.jsx        # Authentication state
     │   └── FarmContext.jsx        # Multi-farm selection state
@@ -141,12 +151,15 @@ All API calls go through the centralized client:
 |----------|----------|-------------|
 | `login(email, password)` | `POST /api/auth/login` | Authenticate user |
 | `getCurrentUser(token)` | `GET /api/auth/me` | Validate token |
+| `getFarms()` | `GET /api/farms` | Fetch farm registry (v2.1) |
 | `getFields(farmId?)` | `GET /api/fields` | Fetch field summaries |
-| `getFieldDetail(fieldId)` | `GET /api/fields/{id}` | Fetch field time series |
+| `getFieldDetail(fieldId)` | `GET /api/fields/{id}` | Fetch field + triggers + weather |
 | `getAlerts(farmId?)` | `GET /api/alerts` | Fetch active alerts |
-| `getSystemStatus()` | `GET /api/system` | Fetch system health |
+| `getSystemStatus()` | `GET /api/system` | Fetch system + MDC metrics |
 | `getSensors(filters)` | `GET /api/sensors` | Fetch sensor registry |
 | `getSensorDetail(sensorId)` | `GET /api/sensors/{id}` | Fetch sensor details |
+| `getWaterDashboard(farmId, timeRange)` | `GET /api/water` | Fetch water KPIs (v2.1) |
+| `getWeather(farmId, compact)` | `GET /api/weather` | Fetch weather data (v2.1) |
 
 ### Authentication Flow
 
@@ -161,9 +174,13 @@ All API calls go through the centralized client:
 | Role | Nav Items | Multi-Farm | Admin Panel |
 |------|-----------|------------|-------------|
 | `local_farm` | Overview, Alerts, System | ❌ | ❌ |
-| `farmer` | Overview, Alerts, Sensors, System | ❌ | ❌ |
-| `enterprise` | Overview, Alerts, Sensors, System | ✅ | ❌ |
+| `farmer` | Overview, Alerts, Sensors, Irrigation, Weather, System | ❌ | ❌ |
+| `enterprise` | Overview, Alerts, Sensors, Irrigation, Weather, System + Cross-Farm Summary | ✅ | ❌ |
 | `admin` | All + Admin | ✅ | ✅ |
+
+Role-aware default landing:
+- `admin` → `/admin`
+- All others → `/farm-overview`
 
 See `src/utils/rolePermissions.js` for detailed permission mappings.
 
@@ -176,20 +193,49 @@ See `src/utils/rolePermissions.js` for detailed permission mappings.
 - Fetches data from `/api/fields` and `/api/alerts`
 
 ### FieldDetail
-- 30-day soil moisture time series chart
-- Temperature time series chart
-- Weekly NDVI bar chart
+- 30-day soil moisture time series chart with threshold reference bands (v2.1)
+- Temperature time series chart with reference bands (v2.1)
+- Weekly NDVI bar chart with reference bands (v2.1)
+- **RecommendationExplainer** panel — "Why this recommendation?" with rule triggers (v2.1)
+- **FieldWeatherCard** — inline current weather widget (v2.1)
 - Current status and recommendation display
+
+### IrrigationWater (v2.1)
+- Water KPI strip: total volume, efficiency, events count, avg per event
+- Time-range toggle (24h / 7d / 30d)
+- Stacked bar chart of irrigation volume & rainfall
+- Moisture zone summary (deficit / optimal / surplus per field)
+
+### WeatherRisk (v2.1)
+- Current conditions card with WeatherIcon
+- Irrigation window recommendation
+- 5-day forecast strip
+- Historical monthly rainfall bar chart
 
 ### AlertsList
 - Grouped alerts by field with severity badges
+- **Time-range toggle** (24h / 7d / 30d) for client-side filtering (v2.1)
+- **Aggregation toggle** — groups similar alerts by (type, severity) (v2.1)
 - Actions: Acknowledge, Snooze, Dismiss
 - Filtering by severity and alert type
 
 ### SensorRegistry
 - Table of all sensors with status indicators
+- **Sort dropdown** — Name, Battery, Last Seen, Status (v2.1)
+- **Sparkline** for recent sensor readings (v2.1)
 - Filter by status, field, and sensor type
 - Click to view detailed sensor info
+
+### SystemStatus
+- MDC gateway status card
+- **MDC metrics strip** — CPU, Memory, Disk, Requests/min (v2.1)
+- **"Edge processing active" banner** (v2.1)
+- Sensor health summary
+
+### CrossFarmSummary (v2.1)
+- Enterprise/admin aggregate KPI strip
+- Shows total farms, fields, critical/warning/healthy counts
+- Rendered conditionally at top of FarmOverview
 
 ## Environment Variables
 
@@ -252,6 +298,37 @@ VITE_API_URL=https://api.igransense.com npm run build
    ```javascript
    export { default as NewComponent } from './NewComponent';
    ```
+
+## Testing (v2.1)
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npx vitest
+
+# Run a specific test file
+npx vitest src/components/__tests__/IrrigationWater.test.jsx
+```
+
+Test coverage (62 tests across 10 files):
+
+| File | Tests | Covers |
+|------|------:|--------|
+| `shared/__tests__/Card.test.jsx` | 3 | Card component |
+| `__tests__/IrrigationWater.test.jsx` | 4 | Irrigation page |
+| `__tests__/WeatherRisk.test.jsx` | 6 | Weather page |
+| `__tests__/FieldDetail.test.jsx` | 5 | Field detail + bands |
+| `__tests__/AlertsList.test.jsx` | 8 | Alerts + time-range + aggregation |
+| `__tests__/SensorRegistry.test.jsx` | 4 | Sensor sort & sparkline |
+| `__tests__/SystemStatus.test.jsx` | 5 | System + MDC metrics |
+| `__tests__/OrgManager.test.jsx` | 4 | Admin org KPIs |
+| `__tests__/rolePermissions.test.jsx` | 18 | All role permission helpers |
+| `__tests__/CrossFarmSummary.test.jsx` | 5 | Enterprise summary |
+| **Total** | **62** | |
+
+Test tooling: vitest 4.0 + @testing-library/react + jsdom
 
 ## Troubleshooting
 

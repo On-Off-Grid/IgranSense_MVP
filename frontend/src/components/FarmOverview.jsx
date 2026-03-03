@@ -2,8 +2,11 @@ import { useState, useEffect, useMemo } from 'react';
 import { getFields, getAlerts } from '../api/client';
 import { LoadingSpinner, ErrorBanner, KPIStrip, StatusFilter } from './shared';
 import ExpandableFieldCard from './ExpandableFieldCard';
+import CrossFarmSummary from './CrossFarmSummary';
 import { useOffline } from '../App';
 import { useFarm } from '../context/FarmContext';
+import { useAuth } from '../context/AuthContext';
+import { canPerformAction } from '../utils/rolePermissions';
 
 export default function FarmOverview() {
   const [fields, setFields] = useState([]);
@@ -13,6 +16,8 @@ export default function FarmOverview() {
   const [filter, setFilter] = useState({ status: 'all', query: '' });
   const { lastSync } = useOffline();
   const { selectedFarm } = useFarm();
+  const { user } = useAuth();
+  const showCrossFarm = user && canPerformAction(user.role, 'view_cross_farm_summary');
 
   // Fetch fields and alerts when farm changes
   useEffect(() => {
@@ -99,6 +104,9 @@ export default function FarmOverview() {
           {fields.length} fields • {sensorCounts.total} sensors deployed
         </p>
       </header>
+
+      {/* Cross-farm summary for enterprise / admin */}
+      {showCrossFarm && <CrossFarmSummary />}
       
       {/* KPI Strip */}
       <KPIStrip

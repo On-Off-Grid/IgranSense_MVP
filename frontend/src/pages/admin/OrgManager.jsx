@@ -14,6 +14,8 @@ const MOCK_ORGS = [
     status: 'active',
     plan: 'enterprise',
     createdAt: '2025-01-15',
+    criticalFields: 2,
+    offlineSensors: 1,
   },
   {
     id: 'org_2',
@@ -23,6 +25,8 @@ const MOCK_ORGS = [
     status: 'active',
     plan: 'enterprise',
     createdAt: '2025-02-01',
+    criticalFields: 0,
+    offlineSensors: 3,
   },
   {
     id: 'org_3',
@@ -32,6 +36,8 @@ const MOCK_ORGS = [
     status: 'trial',
     plan: 'starter',
     createdAt: '2025-02-20',
+    criticalFields: 1,
+    offlineSensors: 0,
   },
 ];
 
@@ -92,6 +98,12 @@ export default function OrgManager() {
                 Plan
               </th>
               <th className="text-left px-4 py-3 text-xs font-medium text-slate-400 uppercase tracking-wider">
+                Critical Fields
+              </th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-slate-400 uppercase tracking-wider">
+                Offline Sensors
+              </th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-slate-400 uppercase tracking-wider">
                 Status
               </th>
               <th className="text-right px-4 py-3 text-xs font-medium text-slate-400 uppercase tracking-wider">
@@ -117,6 +129,20 @@ export default function OrgManager() {
                       : 'bg-slate-500/20 text-slate-400'
                   }`}>
                     {org.plan}
+                  </span>
+                </td>
+                <td className="px-4 py-4">
+                  <span className={`font-medium ${
+                    org.criticalFields > 0 ? 'text-red-400' : 'text-green-400'
+                  }`}>
+                    {org.criticalFields}
+                  </span>
+                </td>
+                <td className="px-4 py-4">
+                  <span className={`font-medium ${
+                    org.offlineSensors > 0 ? 'text-orange-400' : 'text-green-400'
+                  }`}>
+                    {org.offlineSensors}
                   </span>
                 </td>
                 <td className="px-4 py-4">

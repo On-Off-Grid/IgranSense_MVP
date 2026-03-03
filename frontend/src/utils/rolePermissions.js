@@ -13,6 +13,8 @@
  */
 export const NAV_ITEMS = {
   overview: { path: '/farm-overview', label: 'Farm Overview', icon: '🏠' },
+  irrigation: { path: '/irrigation', label: 'Irrigation', icon: '💧' },
+  weather: { path: '/weather', label: 'Weather', icon: '⛅' },
   alerts: { path: '/alerts', label: 'Alerts', icon: '🔔' },
   sensors: { path: '/sensors', label: 'Sensors', icon: '📡' },
   system: { path: '/system', label: 'System', icon: '⚙️' },
@@ -24,9 +26,9 @@ export const NAV_ITEMS = {
  */
 export const ROLE_NAV_ITEMS = {
   local_farm: ['overview', 'alerts', 'system'],
-  farmer: ['overview', 'alerts', 'sensors', 'system'],
-  enterprise: ['overview', 'alerts', 'sensors', 'system'],
-  admin: ['overview', 'alerts', 'sensors', 'system', 'admin'],
+  farmer: ['overview', 'irrigation', 'weather', 'alerts', 'sensors', 'system'],
+  enterprise: ['overview', 'irrigation', 'weather', 'alerts', 'sensors', 'system'],
+  admin: ['overview', 'irrigation', 'weather', 'alerts', 'sensors', 'system', 'admin'],
 };
 
 /**
@@ -34,9 +36,9 @@ export const ROLE_NAV_ITEMS = {
  */
 export const ROLE_ROUTES = {
   local_farm: ['/farm-overview', '/field/:fieldId', '/alerts', '/system'],
-  farmer: ['/farm-overview', '/field/:fieldId', '/alerts', '/sensors', '/system'],
-  enterprise: ['/farm-overview', '/field/:fieldId', '/alerts', '/sensors', '/system', '/select-farm'],
-  admin: ['/farm-overview', '/field/:fieldId', '/alerts', '/sensors', '/system', '/select-farm', '/admin', '/admin/*'],
+  farmer: ['/farm-overview', '/field/:fieldId', '/irrigation', '/weather', '/alerts', '/sensors', '/system'],
+  enterprise: ['/farm-overview', '/field/:fieldId', '/irrigation', '/weather', '/alerts', '/sensors', '/system', '/select-farm'],
+  admin: ['/farm-overview', '/field/:fieldId', '/irrigation', '/weather', '/alerts', '/sensors', '/system', '/select-farm', '/admin', '/admin/*'],
 };
 
 /**
@@ -44,9 +46,9 @@ export const ROLE_ROUTES = {
  */
 export const ROLE_ACTIONS = {
   local_farm: ['view_data', 'acknowledge_alerts'],
-  farmer: ['view_data', 'acknowledge_alerts', 'snooze_alerts', 'dismiss_alerts', 'view_sensors'],
-  enterprise: ['view_data', 'acknowledge_alerts', 'snooze_alerts', 'dismiss_alerts', 'view_sensors', 'switch_farm', 'view_org_stats'],
-  admin: ['view_data', 'acknowledge_alerts', 'snooze_alerts', 'dismiss_alerts', 'view_sensors', 'switch_farm', 'view_org_stats', 'manage_users', 'manage_orgs', 'view_diagnostics'],
+  farmer: ['view_data', 'acknowledge_alerts', 'snooze_alerts', 'dismiss_alerts', 'view_sensors', 'view_irrigation', 'view_weather'],
+  enterprise: ['view_data', 'acknowledge_alerts', 'snooze_alerts', 'dismiss_alerts', 'view_sensors', 'view_irrigation', 'view_weather', 'switch_farm', 'view_org_stats', 'view_cross_farm_summary'],
+  admin: ['view_data', 'acknowledge_alerts', 'snooze_alerts', 'dismiss_alerts', 'view_sensors', 'view_irrigation', 'view_weather', 'switch_farm', 'view_org_stats', 'view_cross_farm_summary', 'manage_users', 'manage_orgs', 'view_diagnostics'],
 };
 
 /**
@@ -110,6 +112,16 @@ export function hasMultiFarmAccess(role) {
  */
 export function isAdmin(role) {
   return role === 'admin';
+}
+
+/**
+ * Get default landing route for a role
+ * @param {string} role - User role
+ * @returns {string}
+ */
+export function getDefaultRoute(role) {
+  if (role === 'admin') return '/admin';
+  return '/farm-overview';
 }
 
 /**

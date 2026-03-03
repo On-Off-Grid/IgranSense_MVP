@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { LoadingSpinner } from '../shared';
-import { isAdmin } from '../../utils/rolePermissions';
+import { isAdmin, canAccessRoute } from '../../utils/rolePermissions';
 
 /**
  * Private route wrapper component
@@ -48,6 +48,11 @@ export default function PrivateRoute({ children, roles, requiredRole }) {
         </div>
       </div>
     );
+  }
+
+  // Route-level role check via ROLE_ROUTES
+  if (role && !canAccessRoute(role, location.pathname)) {
+    return <Navigate to="/farm-overview" replace />;
   }
 
   return children;
