@@ -1,10 +1,12 @@
 /**
  * API Client for IgranSense Edge Simulation Service
  * 
- * Fetches data from the FastAPI backend running on localhost:8000
+ * Fetches data from the FastAPI backend.
+ * In development, Vite proxies /api to localhost:8000.
+ * In production, VITE_API_BASE_URL points to the deployed backend.
  */
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
 const TOKEN_KEY = 'igransense_token';
 
 /**
